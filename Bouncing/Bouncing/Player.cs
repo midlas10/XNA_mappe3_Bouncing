@@ -47,7 +47,6 @@ namespace Bouncing
         {
             position += direction;
 
-            //INSERT MOUSE MOVEMENT
 
             if (position.X < 0)
                 position.X = 0;
@@ -58,7 +57,7 @@ namespace Bouncing
             if (position.Y > clientBounds.Height - frameSize.Y)
                 position.Y = clientBounds.Width - frameSize.Y;
 
-            base.Update(gameTime, clientBounds);
+            //base.Update(gameTime, clientBounds);
         }
     }
 }

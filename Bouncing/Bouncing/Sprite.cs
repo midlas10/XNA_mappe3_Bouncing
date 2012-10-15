@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Bouncing
 {
-    class Sprite
+    abstract class Sprite
     {
         Texture2D image;
 
@@ -27,14 +27,14 @@ namespace Bouncing
             get;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, Rectangle clientBounds)
         {
 
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
+            spriteBatch.Draw(image, position, Color.White);
         }
 
     }

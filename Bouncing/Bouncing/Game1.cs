@@ -11,6 +11,57 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Bouncing
 {
+    public class Bouncing : Microsoft.Xna.Framework.Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+
+        public Bouncing()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
+        protected override void Initialize()
+        {
+            
+
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            base.LoadContent();
+        }
+
+        protected override void UnloadContent()
+        {
+            //base.UnloadContent();
+        }
+
+        protected override void Update(GameTime gameTime)
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+                this.Exit();
+            
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.White);
+
+            base.Draw(gameTime);
+        }
+
+    }
+}
+
+/*
+namespace Bouncing
+{
     
     /// <summary>
     /// This is the main type for your game
@@ -299,3 +350,4 @@ namespace Bouncing
 
     }
 }
+*/
