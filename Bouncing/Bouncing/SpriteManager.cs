@@ -7,18 +7,27 @@ using Microsoft.Xna.Framework;
 
 namespace Bouncing
 {
-    class SpriteManager : Microsoft.Xna.Framework.DrawableGameComponent
+    class SpriteManager : DrawableGameComponent
     {
         SpriteBatch spriteBatch;
         Player _player;
 
+        SpriteManager(Game theGame) : base(theGame)
+        {
+
+        }
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
 
             _player = new Player(Game.Content.Load<Texture2D>("tull"), 
                 Vector2.Zero,
-                Color.White);
+                new Point(300, 300),
+                10,
+                new Point(1,1),
+                new Point(900, 900),
+                new Vector2(6,6));
+
             base.LoadContent();
         }
 
@@ -31,7 +40,7 @@ namespace Bouncing
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Draw(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            //spriteBatch.Draw();
         }
     }
 }

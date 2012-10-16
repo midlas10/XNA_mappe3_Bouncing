@@ -91,6 +91,7 @@
     <Content Include="GameThumbnail.png">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </Content>
+    <Content Include="Images\vor.JPG" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BouncingContent\BouncingContent.contentproj">
