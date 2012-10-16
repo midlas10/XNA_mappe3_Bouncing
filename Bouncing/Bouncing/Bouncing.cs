@@ -1,31 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Bouncing.CollisionSystem;
+using Bouncing.GameObjects;
+using Bouncing.Input;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
-
 namespace Bouncing
 {
     public class Bouncing : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SpriteManager spriteManager;
+        InputManager _input;
+        private ObjectManager objectManager;
+        private CollisionDetectionService collisionDetectionService;
 
+        private Player player;
+       
         public Bouncing()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 800;
+
+            IsMouseVisible = true;
+            objectManager = new ObjectManager(this);
+            collisionDetectionService = new CollisionDetectionService(this);
+
+            _input = new InputManager(this);
+            Components.Add(_input);
+            Components.Add(objectManager);
+            Services.AddService(typeof(ObjectManager), objectManager);
+            Services.AddService(typeof(IManageCollisionsService), collisionDetectionService);
+            Services.AddService(typeof(IInputService), _input);
         }
 
         protected override void Initialize()
         {
-            spriteManager = new SpriteManager(this);
 
             base.Initialize();
         }
@@ -33,8 +45,14 @@ namespace Bouncing
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+            objectManager.SetSpritebatch(spriteBatch);
             base.LoadContent();
+
+            player = new Player(this, spriteBatch, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
+            player.LoadContent();
+
+            objectManager.RegisterObject(player);
+            collisionDetectionService.RegisterObject(player);
         }
 
         protected override void UnloadContent()
@@ -44,19 +62,21 @@ namespace Bouncing
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            _input.Update(gameTime);
+            if (_input.IsKeyDown(Keys.Escape))
                 this.Exit();
             
+            collisionDetectionService.Update(gameTime);
+            objectManager.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Red);
 
             base.Draw(gameTime);
         }
-
     }
 }
 
