@@ -15,6 +15,7 @@ namespace Bouncing
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteManager spriteManager;
 
         public Bouncing()
         {
@@ -24,7 +25,7 @@ namespace Bouncing
 
         protected override void Initialize()
         {
-            
+            spriteManager = new SpriteManager(this);
 
             base.Initialize();
         }
