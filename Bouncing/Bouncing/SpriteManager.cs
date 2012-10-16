@@ -11,6 +11,7 @@ namespace Bouncing
     {
         SpriteBatch spriteBatch;
         Player _player;
+        List<Sprite> enemies = new List<Sprite>();
 
         SpriteManager(Game theGame) : base(theGame)
         {
@@ -20,7 +21,7 @@ namespace Bouncing
         {
             spriteBatch = new SpriteBatch(Game.GraphicsDevice);
 
-            _player = new Player(Game.Content.Load<Texture2D>("tull"), 
+            _player = new Player(Game.Content.Load<Texture2D>("Tull"), 
                 Vector2.Zero,
                 new Point(300, 300),
                 10,
@@ -34,6 +35,7 @@ namespace Bouncing
         public override void Update(GameTime gameTime)
         {
             _player.Update(gameTime, Game.Window.ClientBounds);
+            
 
             base.Update(gameTime);
         }
@@ -44,3 +46,4 @@ namespace Bouncing
         }
     }
 }
+
