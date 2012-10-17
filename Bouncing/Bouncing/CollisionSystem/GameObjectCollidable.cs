@@ -2,7 +2,7 @@
 
 namespace Bouncing.CollisionSystem
 {
-    public class GameObjectCollidable : GameObject
+    public class GameObjectCollidable
     {
         /// <summary>
         /// Set this flag to have the collision system (and any other systems for that matter)
