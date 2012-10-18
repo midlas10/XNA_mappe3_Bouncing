@@ -21,8 +21,8 @@ namespace Bouncing
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            graphics.PreferredBackBufferWidth = 1920;
-            graphics.PreferredBackBufferHeight = 1080;
+            graphics.PreferredBackBufferWidth = 900;
+            graphics.PreferredBackBufferHeight = 900;
 
             IsMouseVisible = true;
             objectManager = new ObjectManager(this);

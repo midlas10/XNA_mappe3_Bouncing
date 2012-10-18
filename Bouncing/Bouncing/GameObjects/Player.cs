@@ -20,6 +20,9 @@ namespace Bouncing.GameObjects
         protected Rectangle playerAreal;
 
         protected float rotation;
+        protected int SpriteWidth;
+        protected int SpriteHeight;
+        protected Rectangle sourceRectangle;
 
         protected ObjectManager objectManager;
         protected IManageCollisionsService collisionManager;
@@ -30,14 +33,16 @@ namespace Bouncing.GameObjects
         {
             spriteBatch = spriteBatchToUse;
             game = baseGame;
-            collisionBox = new Rectangle((int) position.X, (int) position.Y, 0, 0);
+            SpriteHeight = 300;
+            SpriteWidth = 300;
+            collisionBox = new Rectangle((int) position.X, (int) position.Y, SpriteWidth, SpriteHeight);
         }
 
         public void LoadContent()
         {
-            playerArt = game.Content.Load<Texture2D>(@"Images/Player/blob.jpg");
-            collisionBox.Width = playerArt.Width;
-            collisionBox.Height = playerArt.Height;
+            playerArt = game.Content.Load<Texture2D>(@"Images/Player/blob");
+            collisionBox.Width = 20;
+            collisionBox.Height = 20;
             objectManager = (ObjectManager) game.Services.GetService(typeof (ObjectManager));
             collisionManager = (IManageCollisionsService) game.Services.GetService((typeof (IManageCollisionsService)));
             _input = (IInputService) game.Services.GetService(typeof (IInputService));
@@ -47,30 +52,49 @@ namespace Bouncing.GameObjects
         {
             if(_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up))
             {
+                ChangeAnimation(7);
                 position.Y -= movementPerSecond*(float)gameTime.ElapsedGameTime.TotalSeconds;
             } 
             else if(_input.IsKeyDown(Keys.S) || _input.IsKeyDown(Keys.Down))
             {
+                ChangeAnimation(1);
                 position.Y += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
             }
 
             if(_input.IsKeyDown(Keys.A) || _input.IsKeyDown(Keys.Left))
             {
+                ChangeAnimation(5);
                 position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if (_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right))
             {
+                ChangeAnimation(3);
                 position.X += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             rotation += 40 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            collisionBox = new Rectangle((int)position.X, (int)position.Y, playerArt.Width, playerArt.Height);
+            collisionBox = new Rectangle((int)position.X, (int)position.Y, SpriteWidth, SpriteHeight);
+            
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Draw(playerArt, collisionBox, new Rectangle(0, 0, playerArt.Width, playerArt.Height), Color.White, 0f, new Vector2(playerArt.Width / 2, playerArt.Height / 2), SpriteEffects.None, 1f);
+            spriteBatch.Draw(playerArt, collisionBox, sourceRectangle, Color.White, 0f, new Vector2(playerArt.Width / 3, playerArt.Height / 3), SpriteEffects.None, 1f);
             base.Draw(gameTime);
+        }
+
+        protected void ChangeAnimation(int anim)
+        {
+            if(anim >= 6)
+            {
+                sourceRectangle = new Rectangle(SpriteWidth * (8 - anim), SpriteHeight * 0, SpriteWidth, SpriteHeight);
+            } else if(anim >= 3)
+            {
+                sourceRectangle = new Rectangle(SpriteWidth * (5 - anim), SpriteHeight * 1, SpriteWidth, SpriteHeight);
+            } else 
+            {
+                sourceRectangle = new Rectangle(SpriteWidth * (2 - anim), SpriteHeight * 2, SpriteWidth, SpriteHeight);
+            }
         }
     }
 }
