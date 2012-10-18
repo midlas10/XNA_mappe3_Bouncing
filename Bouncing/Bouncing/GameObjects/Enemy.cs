@@ -21,6 +21,18 @@ namespace Bouncing.GameObjects
             game = baseGame;
             collisionBox = new Rectangle((int) position.X, (int) position.Y, 0, 0);
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            
+            base.Update(gameTime);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            
+        }
+
     }
 
 }

@@ -17,7 +17,8 @@
     <XnaCrossPlatformGroupID>0f8e3096-d908-433d-ae4e-34419fe661c7</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
-    <Thumbnail>GameThumbnail.png</Thumbnail>
+    <Thumbnail>
+    </Thumbnail>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -85,22 +86,16 @@
     <Compile Include="GcTimer.cs" />
     <Compile Include="Input\IInputService.cs" />
     <Compile Include="Input\InputManager.cs" />
-    <Compile Include="ObjectManager.cs" />
+    <Compile Include="Managers\LevelManager.cs" />
+    <Compile Include="Managers\ObjectManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Bouncing.cs" />
     <Compile Include="Sprite.cs" />
-    <Compile Include="SpriteManager.cs" />
+    <Compile Include="Managers\SpriteManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
-    <Content Include="GameThumbnail.png">
-      <XnaPlatformSpecific>true</XnaPlatformSpecific>
-    </Content>
-    <Content Include="Images\Backgrounds\space.JPG" />
-    <Content Include="Images\Backgrounds\underwaterlvl.JPG" />
-    <Content Include="Images\Player\blob.jpg" />
-    <Content Include="Images\Enemies\vor.JPG" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BouncingContent\BouncingContent.contentproj">

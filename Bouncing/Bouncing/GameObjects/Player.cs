@@ -35,7 +35,7 @@ namespace Bouncing.GameObjects
 
         public void LoadContent()
         {
-            playerArt = game.Content.Load<Texture2D>("Tull");
+            playerArt = game.Content.Load<Texture2D>(@"Images/Player/blob.jpg");
             collisionBox.Width = playerArt.Width;
             collisionBox.Height = playerArt.Height;
             objectManager = (ObjectManager) game.Services.GetService(typeof (ObjectManager));
@@ -45,19 +45,20 @@ namespace Bouncing.GameObjects
 
         public override void Update(GameTime gameTime)
         {
-            if(_input.IsKeyDown(Keys.W))
+            if(_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up))
             {
                 position.Y -= movementPerSecond*(float)gameTime.ElapsedGameTime.TotalSeconds;
-            } else if(_input.IsKeyDown(Keys.S))
+            } 
+            else if(_input.IsKeyDown(Keys.S) || _input.IsKeyDown(Keys.Down))
             {
                 position.Y += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
             }
 
-            if(_input.IsKeyDown(Keys.A))
+            if(_input.IsKeyDown(Keys.A) || _input.IsKeyDown(Keys.Left))
             {
                 position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (_input.IsKeyDown(Keys.D))
+            else if (_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right))
             {
                 position.X += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
@@ -68,7 +69,7 @@ namespace Bouncing.GameObjects
 
         public override void Draw(GameTime gameTime)
         {
-            spriteBatch.Draw(playerArt, collisionBox, new Rectangle(0, 0, playerArt.Width, playerArt.Height), Color.White, rotation + MathHelper.PiOver2, new Vector2(playerArt.Width / 2, playerArt.Height / 2), SpriteEffects.None, 1f);
+            spriteBatch.Draw(playerArt, collisionBox, new Rectangle(0, 0, playerArt.Width, playerArt.Height), Color.White, 0f, new Vector2(playerArt.Width / 2, playerArt.Height / 2), SpriteEffects.None, 1f);
             base.Draw(gameTime);
         }
     }
