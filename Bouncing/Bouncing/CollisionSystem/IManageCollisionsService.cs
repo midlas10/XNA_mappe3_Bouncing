@@ -17,5 +17,7 @@ namespace Bouncing.CollisionSystem
         /// </summary>
         /// <param name="goc">The gameobject to check for collision</param>
         void RegisterObject(GameObjectCollidable goc);
+
+        void RemoveAllObjects();
     }
 }

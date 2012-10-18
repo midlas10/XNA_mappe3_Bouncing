@@ -1,6 +1,8 @@
 ﻿using Bouncing.CollisionSystem;
 using Bouncing.GameObjects;
 using Bouncing.Input;
+using Bouncing.Levels;
+using Bouncing.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,8 +15,8 @@ namespace Bouncing
         InputManager _input;
         private ObjectManager objectManager;
         private CollisionDetectionService collisionDetectionService;
-
-        private Player player;
+        private ILevel curLevel;
+        private IManageLevels levelManager;
        
         public Bouncing()
         {
@@ -28,6 +30,8 @@ namespace Bouncing
             objectManager = new ObjectManager(this);
             collisionDetectionService = new CollisionDetectionService(this);
 
+            levelManager = new LevelManager();
+            
             _input = new InputManager(this);
             Components.Add(_input);
             Components.Add(objectManager);
@@ -47,12 +51,9 @@ namespace Bouncing
             spriteBatch = new SpriteBatch(GraphicsDevice);
             objectManager.SetSpritebatch(spriteBatch);
             base.LoadContent();
-
-            player = new Player(this, spriteBatch, new Vector2(graphics.PreferredBackBufferWidth / 2, graphics.PreferredBackBufferHeight / 2));
-            player.LoadContent();
-
-            objectManager.RegisterObject(player);
-            collisionDetectionService.RegisterObject(player);
+            levelManager.Init(this, spriteBatch);
+            curLevel = levelManager.NextLevel();
+            curLevel.LoadContent();
         }
 
         protected override void UnloadContent()
@@ -68,6 +69,16 @@ namespace Bouncing
             
             collisionDetectionService.Update(gameTime);
             objectManager.Update(gameTime);
+
+            if(curLevel.LevelDone())
+            {
+                curLevel.UnLoadContent();
+                curLevel = levelManager.NextLevel();
+                if(curLevel == null)
+                {
+                    
+                }
+            }
             base.Update(gameTime);
         }
 

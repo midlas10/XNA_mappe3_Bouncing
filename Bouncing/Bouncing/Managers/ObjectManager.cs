@@ -2,8 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-
-namespace Bouncing
+namespace Bouncing.Managers
 {
     /// <summary>
     /// This is a game component that implements IUpdateable.
@@ -75,6 +74,12 @@ namespace Bouncing
         public void UnregisterObject(GameObject obj)
         {
             objectsToRemove.Enqueue(obj);
+        }
+
+        public void RemoveAllObjects()
+        {
+            objectsToRemove.Clear();
+            objects.Clear();
         }
 
         public void SetSpritebatch(SpriteBatch spriteBatcToUse)

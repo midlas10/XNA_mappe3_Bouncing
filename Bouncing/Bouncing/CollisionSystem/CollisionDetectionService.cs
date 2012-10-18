@@ -74,5 +74,10 @@ namespace Bouncing.CollisionSystem
         {
             collidables.Add(goc);
         }
+
+        public void RemoveAllObjects()
+        {
+            collidables.Clear();
+        }
     }
 }
