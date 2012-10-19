@@ -1,7 +1,6 @@
 ﻿using Bouncing.CollisionSystem;
 using Bouncing.GameObjects;
 using Bouncing.Input;
-using Bouncing.Levels;
 using Bouncing.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,7 +29,7 @@ namespace Bouncing
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
-            
+            IsMouseVisible = true;
             Content.RootDirectory = "Content";
 
             //screenSystem = new ScreenSystem(this);
@@ -79,6 +78,8 @@ namespace Bouncing
 
             AudioManager manager = new AudioManager(audio, waveBank, soundBank);
             */
+            Background tempBack = new Background(Content.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
+            objectManager.RegisterObject(tempBack);
 
             player = new Player(this, spriteBatch, 
                 new Vector2(graphics.PreferredBackBufferWidth / 2, 
@@ -93,6 +94,7 @@ namespace Bouncing
                     graphics.PreferredBackBufferHeight / 2));
             enemy.LoadContent();
 
+            
             objectManager.RegisterObject(enemy);
             collisionDetectionService.RegisterObject(enemy);
 

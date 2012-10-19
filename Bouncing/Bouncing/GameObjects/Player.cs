@@ -9,7 +9,7 @@ namespace Bouncing.GameObjects
 {
     public class Player : GameObjectCollidable
     {
-        protected float movementPerSecond = (float)60;
+        protected float movementPerSecond = (float)120;
         protected SpriteBatch spriteBatch;
         protected Game game;
 
@@ -141,7 +141,7 @@ namespace Bouncing.GameObjects
                 new Rectangle(currentFrame.X * frameSize.X,
                     currentFrame.Y * frameSize.Y,
                     frameSize.X,
-                    frameSize.Y), 
+                    frameSize.Y),
                     Color.White, 
                     0f, 
                     Vector2.Zero, 
@@ -149,6 +149,14 @@ namespace Bouncing.GameObjects
                     0);
 
             base.Draw(gameTime);
+        }
+
+        public override void Collision(GameObjectCollidable goc)
+        {
+            if(goc as Enemy != null)
+            {
+                System.Console.Write("collision");
+            }
         }
     }
 }
