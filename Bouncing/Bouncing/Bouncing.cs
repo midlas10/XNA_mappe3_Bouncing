@@ -43,8 +43,8 @@ namespace Bouncing
             graphics.PreferredBackBufferWidth = 900;
             graphics.PreferredBackBufferHeight = 900;
 
-            screenSystem = new ScreenSystem(this);
-            Components.Add(screenSystem);
+            //screenSystem = new ScreenSystem(this);
+            //Components.Add(screenSystem);
 
             //Bouncing intro = new Bouncing(Content, "Intro\\");
 
