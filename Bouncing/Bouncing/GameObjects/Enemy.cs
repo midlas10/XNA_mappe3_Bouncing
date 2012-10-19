@@ -14,6 +14,7 @@ namespace Bouncing.GameObjects
         Point frameSize = new Point(300, 300);
         Point currentFrame = new Point(0, 0);
         Point imageSize = new Point(3, 3);
+        Point velocity = new Point(1,3); //test
 
         int timeSinceLastFrame = 0;
         int msPerFrame = 200;
@@ -24,14 +25,14 @@ namespace Bouncing.GameObjects
         {
             spriteBatch = spriteBatchToUse;
             game = baseGame;
-            collisionBox = new Rectangle((int) position.X, (int) position.Y, 0, 0);
+            collisionBox = new Rectangle((int) position.X, (int) position.Y, frameSize.X, frameSize.Y);
         }
 
         public void LoadContent()
         {
             image = game.Content.Load<Texture2D>(@"Images/Enemies/vortex");
-            collisionBox.Width = image.Width;
-            collisionBox.Height = image.Height;
+            collisionBox.Width = image.Width / imageSize.X;
+            collisionBox.Height = image.Height / imageSize.Y;
             objectManager = (ObjectManager)game.Services.GetService(typeof(ObjectManager));
         }
 
@@ -51,8 +52,20 @@ namespace Bouncing.GameObjects
                         currentFrame.Y = 0;
                 }
             }
-            
 
+            collisionBox.X += velocity.X;
+            collisionBox.Y += velocity.Y;
+
+
+            if (collisionBox.X <= 0)
+                velocity.X = -velocity.X;
+            if (collisionBox.X + collisionBox.Height >= game.Window.ClientBounds.Width)
+                velocity.X = -velocity.X;
+            if (collisionBox.Y <= 0)
+                velocity.Y = -velocity.Y;
+            if (collisionBox.Y + collisionBox.Width >= game.Window.ClientBounds.Height)
+                velocity.Y = -velocity.Y;
+            
             
             base.Update(gameTime);
         }
@@ -60,7 +73,7 @@ namespace Bouncing.GameObjects
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Draw(image, 
-                Vector2.Zero,
+                new Vector2( collisionBox.X, collisionBox.Y), 
                 new Rectangle(currentFrame.X * frameSize.X,
                     currentFrame.Y * frameSize.Y,
                     frameSize.X,
