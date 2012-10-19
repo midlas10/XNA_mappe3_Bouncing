@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using ScreenSystemLibrary;
-using Bouncing.Managers;
 
 namespace Bouncing
 {
@@ -17,7 +16,7 @@ namespace Bouncing
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         InputManager _input;
-        ScreenSystem screenSystem;
+        //ScreenSystem screenSystem;
         Color clearColor;
 
         private ObjectManager objectManager;
@@ -39,10 +38,6 @@ namespace Bouncing
             
             Content.RootDirectory = "Content";
 
-
-            graphics.PreferredBackBufferWidth = 900;
-            graphics.PreferredBackBufferHeight = 900;
-
             //screenSystem = new ScreenSystem(this);
             //Components.Add(screenSystem);
 
@@ -53,7 +48,7 @@ namespace Bouncing
             objectManager = new ObjectManager(this);
             collisionDetectionService = new CollisionDetectionService(this);
 
-            levelManager = new LevelManager();
+            //levelManager = new LevelManager();
             
             _input = new InputManager(this);
             Components.Add(_input);
@@ -65,7 +60,7 @@ namespace Bouncing
 
         protected override void Initialize()
         {
-            screenSystem.AddScreen(new IntroScreen());
+            //screenSystem.AddScreen(new IntroScreen());
             clearColor = new Color(70, 132, 143);
 
             Settings.MusicVolume = 1.0f;
