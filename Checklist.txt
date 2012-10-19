@@ -1,0 +1,10 @@
+[] StateScreens			Nicolas
+[] Audio			Nicolas
+[] Game Art			Nicolas
+
+[] Usynlige vegger		Sebastian
+[] Objective Items		Sebastian
+[] 
+
+[] Fikse Collisions		Lasse
+[] 
