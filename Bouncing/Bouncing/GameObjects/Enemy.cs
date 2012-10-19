@@ -12,6 +12,7 @@ namespace Bouncing.GameObjects
         protected ObjectManager objectManager;
 
         Point frameSize = new Point(300, 300);
+        Point collisionBoxReduction = new Point(50,50);
         Point currentFrame = new Point(0, 0);
         Point imageSize = new Point(3, 3);
         Point velocity = new Point(1,3); //test
@@ -19,20 +20,22 @@ namespace Bouncing.GameObjects
         int timeSinceLastFrame = 0;
         int msPerFrame = 200;
 
-
         public Enemy(Game baseGame, SpriteBatch spriteBatchToUse, Vector2 position)
             : base(position)
         {
             spriteBatch = spriteBatchToUse;
             game = baseGame;
-            collisionBox = new Rectangle((int) position.X, (int) position.Y, frameSize.X, frameSize.Y);
+            collisionBox = new Rectangle((int)position.X - collisionBoxReduction.X,
+                (int)position.Y - collisionBoxReduction.Y,
+                frameSize.X,
+                frameSize.Y);
         }
 
         public void LoadContent()
         {
             image = game.Content.Load<Texture2D>(@"Images/Enemies/vortex");
-            collisionBox.Width = image.Width / imageSize.X;
-            collisionBox.Height = image.Height / imageSize.Y;
+            collisionBox.Width = (image.Width / imageSize.X) - (collisionBoxReduction.X * 2);
+            collisionBox.Height = (image.Height / imageSize.Y) - (collisionBoxReduction.Y * 2);
             objectManager = (ObjectManager)game.Services.GetService(typeof(ObjectManager));
         }
 
@@ -53,17 +56,27 @@ namespace Bouncing.GameObjects
                 }
             }
 
-            collisionBox.X += velocity.X;
-            collisionBox.Y += velocity.Y;
+            position.X += velocity.X;
+            position.Y += velocity.Y;
 
+            collisionBox.X = (int)position.Y;
+            collisionBox.Y = (int)position.X;
+
+            
+            collisionBox.X = (int) (position.X + collisionBoxReduction.X);
+            collisionBox.Y = (int)(position.Y + collisionBoxReduction.Y);
+            /*
+            collisionBox.Width += collisionBoxReduction.X;
+            collisionBox.Height += collisionBoxReduction.Y;
+            */
 
             if (collisionBox.X <= 0)
                 velocity.X = -velocity.X;
-            if (collisionBox.X + collisionBox.Height >= game.Window.ClientBounds.Width)
+            if (collisionBox.X + collisionBox.Width >= game.Window.ClientBounds.Width)
                 velocity.X = -velocity.X;
             if (collisionBox.Y <= 0)
                 velocity.Y = -velocity.Y;
-            if (collisionBox.Y + collisionBox.Width >= game.Window.ClientBounds.Height)
+            if (collisionBox.Y + collisionBox.Height >= game.Window.ClientBounds.Height)
                 velocity.Y = -velocity.Y;
             
             
@@ -73,7 +86,7 @@ namespace Bouncing.GameObjects
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Draw(image, 
-                new Vector2( collisionBox.X, collisionBox.Y), 
+                new Vector2( position.X, position.Y), 
                 new Rectangle(currentFrame.X * frameSize.X,
                     currentFrame.Y * frameSize.Y,
                     frameSize.X,
