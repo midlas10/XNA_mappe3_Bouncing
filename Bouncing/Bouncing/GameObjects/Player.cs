@@ -41,15 +41,11 @@ namespace Bouncing.GameObjects
 
         public void LoadContent()
         {
-<<<<<<< HEAD
-            playerArt = game.Content.Load<Texture2D>(@"Images/Player/blob");
-            collisionBox.Width = 20;
-            collisionBox.Height = 20;
-=======
+
             image = game.Content.Load<Texture2D>(@"Images/Player/blob");
             collisionBox.Width = image.Width;
             collisionBox.Height = image.Height;
->>>>>>> MenuScreens etc.
+
             objectManager = (ObjectManager) game.Services.GetService(typeof (ObjectManager));
             collisionManager = (IManageCollisionsService) game.Services.GetService((typeof (IManageCollisionsService)));
             _input = (IInputService) game.Services.GetService(typeof (IInputService));
@@ -93,23 +89,16 @@ namespace Bouncing.GameObjects
                 currentFrame.X = 2;
                 currentFrame.Y = 1;
             }
-<<<<<<< HEAD
-            rotation += 40 * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            collisionBox = new Rectangle((int)position.X, (int)position.Y, SpriteWidth, SpriteHeight);
-=======
 
             collisionBox = new Rectangle((int)position.X, (int)position.Y, image.Width, image.Height);
-            
->>>>>>> MenuScreens etc.
+
             
             base.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime)
         {
-<<<<<<< HEAD
-            spriteBatch.Draw(playerArt, collisionBox, sourceRectangle, Color.White, 0f, new Vector2(playerArt.Width / 3, playerArt.Height / 3), SpriteEffects.None, 1f);
-=======
+
             spriteBatch.Draw(image, 
                 collisionBox, 
                 new Rectangle(currentFrame.X * frameSize.X,
@@ -122,7 +111,6 @@ namespace Bouncing.GameObjects
                     SpriteEffects.None, 
                     0);
 
->>>>>>> MenuScreens etc.
             base.Draw(gameTime);
         }
 

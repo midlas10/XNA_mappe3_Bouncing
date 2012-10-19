@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
-using ScreenSystemLibrary;
 
 namespace Bouncing
 {
@@ -21,10 +20,6 @@ namespace Bouncing
 
         private ObjectManager objectManager;
         private CollisionDetectionService collisionDetectionService;
-
-        private ILevel curLevel;
-        private IManageLevels levelManager;
-
 
         private Player player;
         private Enemy enemy;
@@ -75,9 +70,6 @@ namespace Bouncing
             objectManager.SetSpritebatch(spriteBatch);
 
             base.LoadContent();
-            levelManager.Init(this, spriteBatch);
-            curLevel = levelManager.NextLevel();
-            curLevel.LoadContent();
 
 
             /*
@@ -125,15 +117,6 @@ namespace Bouncing
             collisionDetectionService.Update(gameTime);
             objectManager.Update(gameTime);
 
-            if(curLevel.LevelDone())
-            {
-                curLevel.UnLoadContent();
-                curLevel = levelManager.NextLevel();
-                if(curLevel == null)
-                {
-                    
-                }
-            }
             base.Update(gameTime);
         }
 
