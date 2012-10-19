@@ -44,16 +44,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Images\Backgrounds\space.JPG">
-      <Name>space</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Images\Backgrounds\underwaterlvl.JPG">
-      <Name>underwaterlvl</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Maps\Level1\space.JPG">
       <Name>space</Name>
       <Importer>TextureImporter</Importer>
@@ -78,6 +68,13 @@
   <ItemGroup>
     <Compile Include="Images\Enemies\vortex.PNG">
       <Name>vortex</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Collectibles\Level1\star.PNG">
+      <Name>star</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
