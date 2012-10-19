@@ -36,15 +36,15 @@ namespace Bouncing.GameObjects
             game = baseGame;
             SpriteHeight = 300;
             SpriteWidth = 300;
-            collisionBox = new Rectangle((int) position.X, (int) position.Y, SpriteWidth, SpriteHeight);
+            collisionBox = new Rectangle((int) position.X, (int) position.Y, 100, 100);
         }
 
         public void LoadContent()
         {
 
             image = game.Content.Load<Texture2D>(@"Images/Player/blob");
-            collisionBox.Width = image.Width;
-            collisionBox.Height = image.Height;
+            collisionBox.Width = 100;
+            collisionBox.Height = 100;
 
             objectManager = (ObjectManager) game.Services.GetService(typeof (ObjectManager));
             collisionManager = (IManageCollisionsService) game.Services.GetService((typeof (IManageCollisionsService)));
@@ -56,9 +56,46 @@ namespace Bouncing.GameObjects
             currentFrame.X = 1;
             currentFrame.Y = 1;
 
-            if(_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up))
+            if ((_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right)) && (_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up)))
             {
-                ChangeAnimation(7);
+                position.X += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                position.Y -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                currentFrame.X = 2;
+                currentFrame.Y = 0;
+            }
+            else if ((_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right)) && (_input.IsKeyDown(Keys.S) || _input.IsKeyDown(Keys.Down)))
+            {
+                
+                position.X += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                position.Y += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                currentFrame.X = 2;
+                currentFrame.Y = 2;
+            }
+            else if ((_input.IsKeyDown(Keys.A) || _input.IsKeyDown(Keys.Left)) && (_input.IsKeyDown(Keys.S) || _input.IsKeyDown(Keys.Down)))
+            {
+               
+                position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                position.Y += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                currentFrame.X = 0;
+                currentFrame.Y = 2;
+            }
+            else if ((_input.IsKeyDown(Keys.A) || _input.IsKeyDown(Keys.Left)) && (_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up)))
+            {
+                
+                position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                position.Y -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                currentFrame.X = 0;
+                currentFrame.Y = 0;
+            }
+
+
+            else if(_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up))
+            {
+                
                 position.Y -= movementPerSecond*(float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 currentFrame.X = 1;
@@ -66,7 +103,7 @@ namespace Bouncing.GameObjects
             } 
             else if(_input.IsKeyDown(Keys.S) || _input.IsKeyDown(Keys.Down))
             {
-                ChangeAnimation(1);
+                
                 position.Y += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
 
                 currentFrame.X = 1;
@@ -75,7 +112,7 @@ namespace Bouncing.GameObjects
 
             else if(_input.IsKeyDown(Keys.A) || _input.IsKeyDown(Keys.Left))
             {
-                ChangeAnimation(5);
+               
                 position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
                 
                 currentFrame.X = 0;
@@ -83,14 +120,14 @@ namespace Bouncing.GameObjects
             }
             else if (_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right))
             {
-                ChangeAnimation(3);
+                
                 position.X += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
                 currentFrame.X = 2;
                 currentFrame.Y = 1;
             }
 
-            collisionBox = new Rectangle((int)position.X, (int)position.Y, image.Width, image.Height);
+            collisionBox = new Rectangle((int)position.X, (int)position.Y, 100, 100);
 
             
             base.Update(gameTime);
@@ -112,20 +149,6 @@ namespace Bouncing.GameObjects
                     0);
 
             base.Draw(gameTime);
-        }
-
-        protected void ChangeAnimation(int anim)
-        {
-            if(anim >= 6)
-            {
-                sourceRectangle = new Rectangle(SpriteWidth * (8 - anim), SpriteHeight * 0, SpriteWidth, SpriteHeight);
-            } else if(anim >= 3)
-            {
-                sourceRectangle = new Rectangle(SpriteWidth * (5 - anim), SpriteHeight * 1, SpriteWidth, SpriteHeight);
-            } else 
-            {
-                sourceRectangle = new Rectangle(SpriteWidth * (2 - anim), SpriteHeight * 2, SpriteWidth, SpriteHeight);
-            }
         }
     }
 }
