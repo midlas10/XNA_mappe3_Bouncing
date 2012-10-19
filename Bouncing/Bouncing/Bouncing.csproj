@@ -93,6 +93,7 @@
     <Compile Include="GameObjects\Background.cs" />
     <Compile Include="GameObjects\Enemy.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\Star.cs" />
     <Compile Include="GcTimer.cs" />
     <Compile Include="Input\IInputService.cs" />
     <Compile Include="Input\InputManager.cs" />

@@ -156,6 +156,11 @@ namespace Bouncing.GameObjects
             if(goc as Enemy != null)
             {
                 System.Console.Write("collision");
+                return;
+            }
+            if(goc as Star != null)
+            {
+                System.Console.Write("Star collision");
             }
         }
     }

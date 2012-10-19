@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Bouncing.CollisionSystem;
+﻿using Bouncing.CollisionSystem;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,13 +8,28 @@ namespace Bouncing.GameObjects
     {
         protected SpriteBatch spriteBatch;
         protected Game game;
+        protected float movementPerSecond = (float)60;
+        protected Texture2D starArt;
 
         public Star(Game baseGame, Vector2 position, SpriteBatch spriteBatchToUse)
             : base(position)
         {
             spriteBatch = spriteBatchToUse;
             game = baseGame;
-            collisionBox = new Rectangle((int) position.X, (int) position.Y, 0, 0);
+            starArt = game.Content.Load<Texture2D>(@"Collectibles/Level1/star");
+            collisionBox = new Rectangle((int) position.X, (int) position.Y, 50, 50);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            position.Y -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            collisionBox = new Rectangle((int) position.X, (int) position.Y, 50, 50);
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            spriteBatch.Draw(starArt, collisionBox, Color.White);
+            base.Draw(gameTime);
         }
     }
 }

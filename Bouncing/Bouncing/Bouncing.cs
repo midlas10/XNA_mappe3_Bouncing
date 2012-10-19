@@ -29,16 +29,14 @@ namespace Bouncing
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
-            IsMouseVisible = true;
+       
             Content.RootDirectory = "Content";
-
+            IsMouseVisible = true;
             //screenSystem = new ScreenSystem(this);
             //Components.Add(screenSystem);
 
             //Bouncing intro = new Bouncing(Content, "Intro\\");
 
-
-            IsMouseVisible = false;
             objectManager = new ObjectManager(this);
             collisionDetectionService = new CollisionDetectionService(this);
 
@@ -94,10 +92,13 @@ namespace Bouncing
                     graphics.PreferredBackBufferHeight / 2));
             enemy.LoadContent();
 
-            
+            Star test = new Star(this,
+                new Vector2(graphics.PreferredBackBufferWidth / 2,
+                    graphics.PreferredBackBufferHeight / 2), spriteBatch);
+            objectManager.RegisterObject(test);
             objectManager.RegisterObject(enemy);
             collisionDetectionService.RegisterObject(enemy);
-
+            collisionDetectionService.RegisterObject(test);
             base.LoadContent();
 
         }
