@@ -6,6 +6,10 @@ using Bouncing.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using ScreenSystemLibrary;
+using Bouncing.Managers;
+
 namespace Bouncing
 {
     public class Bouncing : Microsoft.Xna.Framework.Game
@@ -13,20 +17,39 @@ namespace Bouncing
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         InputManager _input;
+        ScreenSystem screenSystem;
+        Color clearColor;
+
         private ObjectManager objectManager;
         private CollisionDetectionService collisionDetectionService;
+<<<<<<< HEAD
         private ILevel curLevel;
         private IManageLevels levelManager;
+=======
+
+        private Player player;
+        private Enemy enemy;
+>>>>>>> MenuScreens etc.
        
         public Bouncing()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
+            
             Content.RootDirectory = "Content";
 
+<<<<<<< HEAD
             graphics.PreferredBackBufferWidth = 900;
             graphics.PreferredBackBufferHeight = 900;
+=======
+            screenSystem = new ScreenSystem(this);
+            Components.Add(screenSystem);
 
-            IsMouseVisible = true;
+            //Bouncing intro = new Bouncing(Content, "Intro\\");
+>>>>>>> MenuScreens etc.
+
+            IsMouseVisible = false;
             objectManager = new ObjectManager(this);
             collisionDetectionService = new CollisionDetectionService(this);
 
@@ -42,6 +65,11 @@ namespace Bouncing
 
         protected override void Initialize()
         {
+            screenSystem.AddScreen(new IntroScreen());
+            clearColor = new Color(70, 132, 143);
+
+            Settings.MusicVolume = 1.0f;
+            Settings.MusicVolume = 1.0f;
 
             base.Initialize();
         }
@@ -50,10 +78,39 @@ namespace Bouncing
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             objectManager.SetSpritebatch(spriteBatch);
+<<<<<<< HEAD
             base.LoadContent();
             levelManager.Init(this, spriteBatch);
             curLevel = levelManager.NextLevel();
             curLevel.LoadContent();
+=======
+
+            /*
+            AudioEngine audio = new AudioEngine(Content.RootDirectory + "//Audio//gameIntro.xgs");
+            WaveBank waveBank = new WaveBank(audio, Content.RootDirectory + "//Audio//Wave bank.xwb");
+            SoundBank soundBank = new SoundBank(audio, Content.RootDirectory + "//Audio//Sound Bank.xsb");
+
+            AudioManager manager = new AudioManager(audio, waveBank, soundBank);
+            */
+
+            player = new Player(this, spriteBatch, 
+                new Vector2(graphics.PreferredBackBufferWidth / 2, 
+                    graphics.PreferredBackBufferHeight / 2));
+            player.LoadContent();
+
+            objectManager.RegisterObject(player);
+            collisionDetectionService.RegisterObject(player);
+
+            enemy = new Enemy(this, spriteBatch,
+                new Vector2(graphics.PreferredBackBufferWidth / 2,
+                    graphics.PreferredBackBufferHeight / 2));
+            enemy.LoadContent();
+
+            objectManager.RegisterObject(enemy);
+            collisionDetectionService.RegisterObject(enemy);
+
+            base.LoadContent();
+>>>>>>> MenuScreens etc.
         }
 
         protected override void UnloadContent()
@@ -66,6 +123,9 @@ namespace Bouncing
             _input.Update(gameTime);
             if (_input.IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            //AudioManager.singleton.Update();
+
             
             collisionDetectionService.Update(gameTime);
             objectManager.Update(gameTime);
@@ -84,7 +144,7 @@ namespace Bouncing
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Red);
+            GraphicsDevice.Clear(clearColor);
 
             base.Draw(gameTime);
         }
