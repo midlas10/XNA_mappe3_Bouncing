@@ -22,14 +22,14 @@ namespace Bouncing
 
         private ObjectManager objectManager;
         private CollisionDetectionService collisionDetectionService;
-<<<<<<< HEAD
+
         private ILevel curLevel;
         private IManageLevels levelManager;
-=======
+
 
         private Player player;
         private Enemy enemy;
->>>>>>> MenuScreens etc.
+
        
         public Bouncing()
         {
@@ -39,15 +39,15 @@ namespace Bouncing
             
             Content.RootDirectory = "Content";
 
-<<<<<<< HEAD
+
             graphics.PreferredBackBufferWidth = 900;
             graphics.PreferredBackBufferHeight = 900;
-=======
+
             screenSystem = new ScreenSystem(this);
             Components.Add(screenSystem);
 
             //Bouncing intro = new Bouncing(Content, "Intro\\");
->>>>>>> MenuScreens etc.
+
 
             IsMouseVisible = false;
             objectManager = new ObjectManager(this);
@@ -78,12 +78,12 @@ namespace Bouncing
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             objectManager.SetSpritebatch(spriteBatch);
-<<<<<<< HEAD
+
             base.LoadContent();
             levelManager.Init(this, spriteBatch);
             curLevel = levelManager.NextLevel();
             curLevel.LoadContent();
-=======
+
 
             /*
             AudioEngine audio = new AudioEngine(Content.RootDirectory + "//Audio//gameIntro.xgs");
@@ -110,7 +110,7 @@ namespace Bouncing
             collisionDetectionService.RegisterObject(enemy);
 
             base.LoadContent();
->>>>>>> MenuScreens etc.
+
         }
 
         protected override void UnloadContent()
