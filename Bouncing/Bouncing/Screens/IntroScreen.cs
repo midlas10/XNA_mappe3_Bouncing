@@ -1,33 +1,46 @@
-﻿/*
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ScreenSystemLibrary;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
+
 
 namespace Bouncing
 {
-    public class IntroScreen : GameScreen
+    public class IntroScreen : LogoScreen
     {
-        public override bool AcceptsInput
+        public IntroScreen()
+            : base() { }
+
+        public IntroScreen(Color fadeColor, float fadePercent)
+            : base(fadeColor, fadePercent) { }
+
+        public override void Initialize()
         {
-            get { throw new NotImplementedException(); }
+            //Initializes the IntroScreen
+            ScreenTime = TimeSpan.FromSeconds(0);
+            Removing += new EventHandler(RemovingScreen);
+            base.Initialize();
         }
 
-        protected override void DrawScreen(Microsoft.Xna.Framework.GameTime gameTime)
+        public override void LoadContent()
         {
-            throw new NotImplementedException();
+            ContentManager content = ScreenSystem.Content;
+            //Texture = content.Load<Texture2D>(@"Images/intro");
         }
 
-        public override void InitializeScreen()
+        public override void UnloadContent()
         {
-            throw new NotImplementedException();
+            Texture = null;
         }
 
-        protected override void UpdateScreen(Microsoft.Xna.Framework.GameTime gameTime)
+        void RemovingScreen(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //Tells which Screen to load when IntroScreenTime is passed.
+            ScreenSystem.AddScreen(new MainMenuScreen());
         }
     }
 }
-*/

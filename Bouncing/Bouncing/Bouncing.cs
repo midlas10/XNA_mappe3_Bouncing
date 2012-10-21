@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using ScreenSystemLibrary;
 
 namespace Bouncing
 {
@@ -14,7 +15,7 @@ namespace Bouncing
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         InputManager _input;
-        //ScreenSystem screenSystem;
+        ScreenSystem screenSystem;
         Color clearColor;
 
         private ObjectManager objectManager;
@@ -26,14 +27,18 @@ namespace Bouncing
        
         public Bouncing()
         {
+
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1280;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
        
+            /*
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            //screenSystem = new ScreenSystem(this);
-            //Components.Add(screenSystem);
+            */
+
+            screenSystem = new ScreenSystem(this);
+            Components.Add(screenSystem);
 
             //Bouncing intro = new Bouncing(Content, "Intro\\");
 
@@ -52,7 +57,7 @@ namespace Bouncing
 
         protected override void Initialize()
         {
-            //screenSystem.AddScreen(new IntroScreen());
+            screenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
             clearColor = new Color(70, 132, 143);
 
             Settings.MusicVolume = 1.0f;
@@ -63,10 +68,10 @@ namespace Bouncing
 
         protected override void LoadContent()
         {
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
             objectManager.SetSpritebatch(spriteBatch);
 
-            base.LoadContent();
 
 
             /*
@@ -76,6 +81,7 @@ namespace Bouncing
 
             AudioManager manager = new AudioManager(audio, waveBank, soundBank);
             */
+
             Background tempBack = new Background(Content.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
             objectManager.RegisterObject(tempBack);
 
@@ -87,32 +93,38 @@ namespace Bouncing
             objectManager.RegisterObject(player);
             collisionDetectionService.RegisterObject(player);
 
+
+            //Loading the Enemy Sprites
             enemy = new Enemy(this, spriteBatch,
                 new Vector2(graphics.PreferredBackBufferWidth / 2,
                     graphics.PreferredBackBufferHeight / 2));
             enemy.LoadContent();
 
+
+            //Loading the Collectibles
             Star test = new Star(this,
                 new Vector2(graphics.PreferredBackBufferWidth / 2,
                     graphics.PreferredBackBufferHeight / 2), spriteBatch);
+
+            //Object Manager
             objectManager.RegisterObject(test);
             objectManager.RegisterObject(enemy);
             collisionDetectionService.RegisterObject(enemy);
             collisionDetectionService.RegisterObject(test);
             base.LoadContent();
-
+            
         }
 
         protected override void UnloadContent()
         {
-            //base.UnloadContent();
+            base.UnloadContent();
         }
 
         protected override void Update(GameTime gameTime)
         {
             _input.Update(gameTime);
-            if (_input.IsKeyDown(Keys.Escape))
-                this.Exit();
+            //if (_input.IsKeyDown(Keys.Escape))
+            //    this.Exit();
 
             //AudioManager.singleton.Update();
 
