@@ -1,4 +1,5 @@
-﻿using Bouncing.CollisionSystem;
+﻿using System;
+using Bouncing.CollisionSystem;
 using Bouncing.Input;
 using Bouncing.Managers;
 using Microsoft.Xna.Framework;
@@ -58,36 +59,53 @@ namespace Bouncing.GameObjects
 
             if ((_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right)) && (_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up)))
             {
-                position.X += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                position.Y -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+                if (game.Window.ClientBounds.Width >= position.X + collisionBox.Width)
+                {
+                    position.X += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                if (position.Y >= 0)
+                {
+                    position.Y -= movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 currentFrame.X = 2;
                 currentFrame.Y = 0;
             }
             else if ((_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right)) && (_input.IsKeyDown(Keys.S) || _input.IsKeyDown(Keys.Down)))
             {
-                
-                position.X += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                position.Y += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+                if (game.Window.ClientBounds.Width >= Position.X + collisionBox.Width)
+                {
+                    position.X += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                if (game.Window.ClientBounds.Height >= position.Y + collisionBox.Height)
+                {
+                    position.Y += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 currentFrame.X = 2;
                 currentFrame.Y = 2;
             }
             else if ((_input.IsKeyDown(Keys.A) || _input.IsKeyDown(Keys.Left)) && (_input.IsKeyDown(Keys.S) || _input.IsKeyDown(Keys.Down)))
             {
-               
-                position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                position.Y += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+                if (position.X >= 0)
+                {
+                    position.X -= movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                if (game.Window.ClientBounds.Height >= position.Y + collisionBox.Height)
+                {
+                    position.Y += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 currentFrame.X = 0;
                 currentFrame.Y = 2;
             }
             else if ((_input.IsKeyDown(Keys.A) || _input.IsKeyDown(Keys.Left)) && (_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up)))
             {
-                
-                position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                position.Y -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+                if (position.X >= 0)
+                {
+                    position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                if (position.Y >= 0)
+                {
+                    position.Y -= movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 currentFrame.X = 0;
                 currentFrame.Y = 0;
             }
@@ -95,34 +113,38 @@ namespace Bouncing.GameObjects
 
             else if(_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up))
             {
-                
-                position.Y -= movementPerSecond*(float)gameTime.ElapsedGameTime.TotalSeconds;
-
+                if (position.Y >= 0)
+                {
+                    position.Y -= movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 currentFrame.X = 1;
                 currentFrame.Y = 0;
             } 
             else if(_input.IsKeyDown(Keys.S) || _input.IsKeyDown(Keys.Down))
             {
-                
-                position.Y += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
-
+                if (game.Window.ClientBounds.Height >= position.Y + collisionBox.Height)
+                {
+                    position.Y += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 currentFrame.X = 1;
                 currentFrame.Y = 2;
             }
 
             else if(_input.IsKeyDown(Keys.A) || _input.IsKeyDown(Keys.Left))
             {
-               
-                position.X -= movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-                
+                if (position.X >= 0)
+                {
+                    position.X -= movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 currentFrame.X = 0;
                 currentFrame.Y = 1;
             }
             else if (_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right))
             {
-                
-                position.X += movementPerSecond * (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+                if (game.Window.ClientBounds.Width >= position.X + collisionBox.Width)
+                {
+                    position.X += movementPerSecond*(float) gameTime.ElapsedGameTime.TotalSeconds;
+                }
                 currentFrame.X = 2;
                 currentFrame.Y = 1;
             }
@@ -161,6 +183,7 @@ namespace Bouncing.GameObjects
             if(goc as Star != null)
             {
                 System.Console.Write("Star collision");
+                return;
             }
         }
     }

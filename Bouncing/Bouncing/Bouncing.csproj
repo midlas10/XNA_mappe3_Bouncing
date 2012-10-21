@@ -91,7 +91,8 @@
     <Compile Include="CollisionSystem\IManageCollisionsService.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameObjects\Background.cs" />
-    <Compile Include="GameObjects\Enemy.cs" />
+    <Compile Include="GameObjects\Enemy\Enemy.cs" />
+    <Compile Include="GameObjects\InvicibleWall.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\Star.cs" />
     <Compile Include="GcTimer.cs" />
