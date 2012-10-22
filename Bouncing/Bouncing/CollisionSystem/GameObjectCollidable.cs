@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace Bouncing.CollisionSystem
+namespace Bouncing
 {
     public class GameObjectCollidable : GameObject
     {

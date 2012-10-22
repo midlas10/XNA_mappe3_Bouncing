@@ -7,14 +7,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-//Example on how to use the ScreenSystem.  If you wish to use it in your own
-//project, grab the ScreenSystem.dll found in the ScreenSystemImplementation
-//folder and paste it in your project's folder.  Once that is done, right click
-//References on your code project (not your content project) and click Add
-//Reference.  Click the browse tab and look for the DLL.
 namespace Bouncing
 {
-    public class PauseScreen:MenuScreen
+    public class PauseScreen : MenuScreen
     {
         string prevEntry, nextEntry, selectedEntry, cancelMenu;
         public override string PreviousEntryActionName
@@ -63,7 +58,7 @@ namespace Bouncing
 
             //Keys are already mapped from Menu Screen so we do not need to map
             //them again
-            
+
             //Initialize the entries and set up the events
             resume = new MainMenuEntry(this, "Resume");
             resume.Selected += new EventHandler(ResumeSelect);
@@ -84,9 +79,9 @@ namespace Bouncing
         public override void LoadContent()
         {
             ContentManager content = ScreenSystem.Content;
-            SpriteFont = content.Load<SpriteFont>(@"Fonts/MenuFont");
+            SpriteFont = content.Load<SpriteFont>("Fonts/MenuFont");
 
-            //Set up positioning
+            //Positions the menu entries
             resume.SetPosition(new Vector2(100, 200), true);
             submenu.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), resume, true);
             mainmenu.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), submenu, true);

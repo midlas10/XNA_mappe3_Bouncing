@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Bouncing.GameObjects
+namespace Bouncing
 {
     public class Background : GameObject
     {

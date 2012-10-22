@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace Bouncing.Input
+namespace Bouncing
 {
     /// <summary>
     /// Implements the IInputService interface and the GameComponent class.

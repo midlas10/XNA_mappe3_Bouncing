@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Bouncing.Managers
+namespace Bouncing
 {
     /// <summary>
     /// This is a game component that implements IUpdateable.
@@ -16,12 +16,19 @@ namespace Bouncing.Managers
 
 
         protected SpriteBatch spriteBatch;
+        private PlayScreen playScreen;
 
         public ObjectManager(Game game)
             : base(game)
         {
             objects = new List<GameObject>();
             objectsToRemove = new Queue<GameObject>();
+        }
+
+        public ObjectManager(PlayScreen playScreen)
+        {
+            // TODO: Complete member initialization
+            this.playScreen = playScreen;
         }
 
         /// <summary>
@@ -47,6 +54,7 @@ namespace Bouncing.Managers
 
         public override void Draw(GameTime gameTime)
         {
+            /*
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             //Draw all the objects in the objectlist);
             foreach (GameObject go in objects)
@@ -55,9 +63,9 @@ namespace Bouncing.Managers
             }
             
             spriteBatch.End();
+            */
 
-
-            //base.Draw(gameTime);
+            base.Draw(gameTime);
         }
 
         /// <summary>

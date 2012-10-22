@@ -1,21 +1,20 @@
-﻿/*
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ScreenSystemLibrary;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 
-namespace ScreenSystemImplementation
+namespace Bouncing
 {
-    /// <summary>
-    /// Sample play screen.  No new features are presented here,
-    /// so there are no comments currently.
-    /// </summary>
+    
     public class PlayScreen : GameScreen
     {
         public override bool AcceptsInput
@@ -23,27 +22,41 @@ namespace ScreenSystemImplementation
             get { return true; }
         }
 
-        string title, description;
-
         float seconds;
-
         Color titleColor, descriptionColor;
-
         SpriteFont font;
-
-        Vector2 position;
-
         InputSystem input;
+
+        GraphicsDevice graphics;
+        SpriteBatch spriteBatch;
+        InputManager _input;
+        ScreenSystem screenSystem;
+        Color clearColor;
+
+        private ObjectManager objectManager;
+        private CollisionDetectionService collisionDetectionService;
+
+        private Player player;
+        private Enemy enemy;
+
+        public PlayScreen()
+        {
+            objectManager = new ObjectManager(this);
+            collisionDetectionService = new CollisionDetectionService(this);
+
+            //levelManager = new LevelManager();
+
+            _input = new InputManager(this);
+            Components.Add(_input);
+            Components.Add(objectManager);
+            Services.AddService(typeof(ObjectManager), objectManager);
+            Services.AddService(typeof(IManageCollisionsService), collisionDetectionService);
+            Services.AddService(typeof(IInputService), _input);
+        }
 
         public override void Initialize()
         {
-            TransitionOnTime = TimeSpan.FromSeconds(1);
-            title = "-----Play Screen-----";
-            titleColor = Color.Green;
-            description = "You put your play logic in this screen.  Press Escape to pause";
-            descriptionColor = Color.White;
-
-            position = new Vector2(100, 200);
+            //objectManager = new ObjectManager(this);
 
             input = ScreenSystem.InputSystem;
             input.NewAction("Pause", Keys.Escape);
@@ -59,8 +72,44 @@ namespace ScreenSystemImplementation
 
         public override void LoadContent()
         {
+            spriteBatch = new SpriteBatch(graphics);
+
+            objectManager.SetSpritebatch(spriteBatch);
+
+            Background tempBack = new Background(ContentLoadException.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
+
+
+            player = new Player(this, spriteBatch,
+                new Vector2(graphics.PreferredBackBufferWidth / 2,
+                    graphics.PreferredBackBufferHeight / 2));
+            player.LoadContent();
+
+
+            objectManager.RegisterObject(player);
+            collisionDetectionService.RegisterObject(player);
+
+
+            //Loading the Enemy Sprites
+            enemy = new Enemy(this, spriteBatch,
+                new Vector2(graphics.PreferredBackBufferWidth / 2,
+                    graphics.PreferredBackBufferHeight / 2));
+            enemy.LoadContent();
+
+
+            //Loading the Collectibles
+            Star test = new Star(this,
+                new Vector2(graphics.PreferredBackBufferWidth / 2,
+                    graphics.PreferredBackBufferHeight / 2), spriteBatch);
+
+            //Object Manager
+            objectManager.RegisterObject(test);
+            objectManager.RegisterObject(enemy);
+            collisionDetectionService.RegisterObject(enemy);
+            collisionDetectionService.RegisterObject(test);
+            base.LoadContent();
+
             ContentManager content = ScreenSystem.Content;
-            font = content.Load<SpriteFont>("gamefont");
+            font = content.Load<SpriteFont>("Fonts/GameFont");
         }
 
         public override void UnloadContent()
@@ -73,6 +122,23 @@ namespace ScreenSystemImplementation
             seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
 
+        protected override void Update(GameTime gameTime)
+        {
+
+            _input.Update(gameTime);
+            //if (_input.IsKeyDown(Keys.Escape))
+            //    this.Exit();
+
+            //AudioManager.singleton.Update();
+
+
+            collisionDetectionService.Update(gameTime);
+            objectManager.Update(gameTime);
+
+
+            base.Update(gameTime);
+        }
+
         public override void HandleInput()
         {
             if (input.NewActionPress("Pause"))
@@ -82,16 +148,11 @@ namespace ScreenSystemImplementation
             }
         }
 
-        protected override void DrawScreen(GameTime gameTime)
+        protected override void Draw(GameTime gameTime)
         {
-            position = new Vector2(100, 200);
-            SpriteBatch spriteBatch = ScreenSystem.SpriteBatch;
-            spriteBatch.DrawString(font, title, position, titleColor);
-            position = Vector2.Add(position, new Vector2(0, font.LineSpacing + 10));
-            spriteBatch.DrawString(font, description, position, descriptionColor);
-            position = Vector2.Add(position, new Vector2(0, font.LineSpacing + 10));
-            spriteBatch.DrawString(font, ((int)seconds).ToString(), position, Color.White);
+            GraphicsDevice.Clear(clearColor);
+
+            base.Draw(gameTime);
         }
     }
 }
-*/

@@ -1,12 +1,9 @@
 ﻿using System;
-using Bouncing.CollisionSystem;
-using Bouncing.Input;
-using Bouncing.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Bouncing.GameObjects
+namespace Bouncing
 {
     public class Player : GameObjectCollidable
     {

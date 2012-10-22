@@ -8,7 +8,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-
+//Example on how to use the ScreenSystem.  If you wish to use it in your own
+//project, grab the ScreenSystem.dll found in the ScreenSystemImplementation
+//folder and paste it in your project's folder.  Once that is done, right click
+//References on your code project (not your content project) and click Add
+//Reference.  Click the browse tab and look for the DLL.
 namespace Bouncing
 {
     public class MainMenuScreen : MenuScreen
@@ -38,7 +42,7 @@ namespace Bouncing
 
         public MainMenuScreen()
         {
-            //Sets up names
+            //Set up the action names
             prevEntry = "MenuUp";
             nextEntry = "MenuDown";
             selectedEntry = "MenuAccept";
@@ -59,17 +63,17 @@ namespace Bouncing
             //Get a reference to the input system
             InputSystem input = ScreenSystem.InputSystem;
 
-            //Load the actions and user input
+            //Load the actions
             input.NewAction(PreviousEntryActionName, Keys.Up);
             input.NewAction(NextEntryActionName, Keys.Down);
             input.NewAction(SelectedEntryActionName, Keys.Enter);
             input.NewAction(MenuCancelActionName, Keys.Escape);
 
             //Initialize the entries
-            play = new MainMenuEntry(this, "Play");
-            submenu = new MainMenuEntry(this, "Options");
-            intro = new MainMenuEntry(this, "Intro");
-            quit = new MainMenuEntry(this, "Quit");
+            play = new MainMenuEntry(this, "Play Screen");
+            submenu = new MainMenuEntry(this, "Sub-Menu Entry");
+            intro = new MainMenuEntry(this, "Intro Screen");
+            quit = new MainMenuEntry(this, "Quit Game");
 
             //Set up the screen events
             Removing += new EventHandler(MainMenuRemoving);
@@ -78,7 +82,7 @@ namespace Bouncing
 
             //Set up the entry events, and load a submenu.
             play.Selected += new EventHandler(PlaySelect);
-            //submenu.AddSubMenu(new SubMenu(this));
+            submenu.AddSubMenu(new OptionsScreen(this));
             intro.Selected += new EventHandler(IntroSelect);
             quit.Selected += new EventHandler(QuitSelect);
 
@@ -94,9 +98,6 @@ namespace Bouncing
             ContentManager content = ScreenSystem.Content;
             SpriteFont = content.Load<SpriteFont>(@"Fonts/MenuFont");
 
-            //Initialize is called before LoadContent, so if you want to 
-            //use relative position with the line spacing like below,
-            //you need to do it after load content and spritefont
             play.SetPosition(new Vector2(100, 200), true);
             submenu.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), play, true);
             intro.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), submenu, true);
@@ -133,13 +134,13 @@ namespace Bouncing
         void PlaySelect(object sender, EventArgs e)
         {
             ExitScreen();
-            //ScreenSystem.AddScreen(new PlayScreen());
+            ScreenSystem.AddScreen(new PlayScreen());
         }
 
         void IntroSelect(object sender, EventArgs e)
         {
             ExitScreen();
-            //ScreenSystem.AddScreen(new PHSLogoScreen(Color.Black, 0.5f));
+            ScreenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
         }
 
         void QuitSelect(object sender, EventArgs e)

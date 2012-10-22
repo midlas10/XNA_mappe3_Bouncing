@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Bouncing.CollisionSystem;
+using Bouncing;
 
-namespace Bouncing.GameObjects
+namespace Bouncing
 {
     class InvicibleWall : GameObjectCollidable
     {

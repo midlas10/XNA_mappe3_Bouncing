@@ -1,11 +1,88 @@
-﻿using Bouncing.CollisionSystem;
-using Bouncing.GameObjects;
-using Bouncing.Input;
-using Bouncing.Managers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using ScreenSystemLibrary;
+
+namespace Bouncing
+{
+    
+    public class Bouncing : Microsoft.Xna.Framework.Game
+    {
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
+        ScreenSystem screenSystem;
+
+        public Bouncing()
+        {
+            graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
+            Content.RootDirectory = "Content";
+
+            screenSystem = new ScreenSystem(this);
+            Components.Add(screenSystem);
+        }
+
+        protected override void Initialize()
+        {
+            
+
+            Settings.MusicVolume = 1.0f;
+            Settings.MusicVolume = 1.0f;
+
+            // TODO: Add your initialization logic here
+            screenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
+            base.Initialize();
+        }
+
+        protected override void LoadContent()
+        {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
+        }
+
+        protected override void UnloadContent()
+        {
+            // TODO: Unload any non ContentManager content here
+        }
+
+        
+        protected override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+
+            base.Draw(gameTime);
+        }
+    }
+}
+
+
+
+
+/*
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using ScreenSystemLibrary;
 
 namespace Bouncing
@@ -34,18 +111,19 @@ namespace Bouncing
         public Bouncing()
         {
 
+
+            
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
        
-            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             
-
             screenSystem = new ScreenSystem(this);
             Components.Add(screenSystem);
 
+            
             //Bouncing intro = new Bouncing(Content, "Intro\\");
 
             objectManager = new ObjectManager(this);
@@ -59,6 +137,7 @@ namespace Bouncing
             Services.AddService(typeof(ObjectManager), objectManager);
             Services.AddService(typeof(IManageCollisionsService), collisionDetectionService);
             Services.AddService(typeof(IInputService), _input);
+            
         }
 
         protected override void Initialize()
@@ -66,7 +145,7 @@ namespace Bouncing
             screenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
             clearColor = new Color(70, 132, 143);
 
-            objectManager = new ObjectManager(this);
+            //objectManager = new ObjectManager(this);
 
             Settings.MusicVolume = 1.0f;
             Settings.MusicVolume = 1.0f;
@@ -76,15 +155,20 @@ namespace Bouncing
 
         protected override void LoadContent()
         {
+
+
+
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            
             objectManager.SetSpritebatch(spriteBatch);
 
-            /*
-            audioEngine = new AudioEngine(@"Audio/test.xgs");
-            waveBank = new WaveBank(audioEngine, @"Audio/test2.xwb");
-            soundBank = new SoundBank(audioEngine, @"Audio/test3.xsb");
-            */
+            
+            //audioEngine = new AudioEngine(@"Audio/test.xgs");
+            //waveBank = new WaveBank(audioEngine, @"Audio/test2.xwb");
+            //soundBank = new SoundBank(audioEngine, @"Audio/test3.xsb");
+            
              
             Background tempBack = new Background(Content.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
             //objectManager.RegisterObject(tempBack);
@@ -126,6 +210,7 @@ namespace Bouncing
 
         protected override void Update(GameTime gameTime)
         {
+            
             _input.Update(gameTime);
             //if (_input.IsKeyDown(Keys.Escape))
             //    this.Exit();
@@ -135,7 +220,8 @@ namespace Bouncing
             
             collisionDetectionService.Update(gameTime);
             objectManager.Update(gameTime);
-
+            
+            
             base.Update(gameTime);
         }
 
@@ -147,6 +233,11 @@ namespace Bouncing
         }
     }
 }
+*/
+
+
+
+
 
 /*
 namespace Bouncing

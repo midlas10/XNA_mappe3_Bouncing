@@ -20,7 +20,6 @@ namespace Bouncing
 
         public override void Initialize()
         {
-            //Initializes the IntroScreen
             ScreenTime = TimeSpan.FromSeconds(0);
             Removing += new EventHandler(RemovingScreen);
             base.Initialize();
@@ -29,7 +28,7 @@ namespace Bouncing
         public override void LoadContent()
         {
             ContentManager content = ScreenSystem.Content;
-            //Texture = content.Load<Texture2D>(@"Images/intro");
+            Texture = content.Load<Texture2D>("Images/intro");
         }
 
         public override void UnloadContent()
@@ -39,7 +38,7 @@ namespace Bouncing
 
         void RemovingScreen(object sender, EventArgs e)
         {
-            //Tells which Screen to load when IntroScreenTime is passed.
+            //Loads the MainMenuScreen when Intro is over
             ScreenSystem.AddScreen(new MainMenuScreen());
         }
     }

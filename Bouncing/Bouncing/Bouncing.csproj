@@ -99,7 +99,6 @@
     <Compile Include="Input\IInputService.cs" />
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Managers\AudioManager.cs" />
-    <Compile Include="Managers\ScreenManager.cs" />
     <Compile Include="Managers\ObjectManager.cs" />
     <Compile Include="MenuEntries\MainMenuEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 
-namespace Bouncing.CollisionSystem
+namespace Bouncing
 {
     /// <summary>
     /// An instance of this gamecomponent can be used to manage collisions between 2D objects in a gameworld. 

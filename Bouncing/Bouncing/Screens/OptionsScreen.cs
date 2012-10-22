@@ -70,7 +70,7 @@ namespace Bouncing
         public override void LoadContent()
         {
             ContentManager content = ScreenSystem.Content;
-            SpriteFont = content.Load<SpriteFont>("menu");
+            SpriteFont = content.Load<SpriteFont>("Fonts/MenuFont");
 
             //Code to push the title of the menu
             //Will be dynamic in a few builds
@@ -84,7 +84,7 @@ namespace Bouncing
 
             //The title of the menu entry that activated this menu
             //Will be dynamic in build 0.9x           
-            Title = "Sub-Menu Entry";
+            Title = "Options";
             OffsetTitle = new Vector2(-150, 0);
         }
 

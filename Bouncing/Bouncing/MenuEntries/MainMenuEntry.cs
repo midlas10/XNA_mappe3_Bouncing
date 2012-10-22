@@ -10,20 +10,17 @@ namespace Bouncing
 {
     public class MainMenuEntry : MenuEntry
     {
-        private string EntryDescription
-        { get; set; }
-
         public MainMenuEntry(MenuScreen menu, string title)
             : base(menu, title)
         {
-            //EntryDescription = description;
+
         }
 
         public override void AnimateHighlighted(GameTime gameTime)
         {
-            
-            float pulseEffect = (float)(Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3) + 1);
-            Scale = 1 + pulseEffect * 0.05f;
+            //Gives the active entry a pulsating effect
+            float pulse = (float)(Math.Sin(gameTime.TotalGameTime.TotalSeconds * 3) + 1);
+            Scale = 1 + pulse * 0.05f;
 
 
         }

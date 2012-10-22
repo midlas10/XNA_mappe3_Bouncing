@@ -1,10 +1,10 @@
-﻿using Bouncing.Managers;
+﻿using Bouncing;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Bouncing.GameObjects
+namespace Bouncing
 {
-    public class Enemy : CollisionSystem.GameObjectCollidable
+    public class Enemy : GameObjectCollidable
     {
         protected Texture2D image;
         protected Game game;

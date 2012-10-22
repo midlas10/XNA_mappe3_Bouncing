@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bouncing.CollisionSystem
+namespace Bouncing
 {
     /// <summary>
     /// Defines functions that all collisionsystems developed for this

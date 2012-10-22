@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace Bouncing.Input
+namespace Bouncing
 {
     /// <summary>
     /// A simple enum used to define buttons on a mouse.
