@@ -85,7 +85,6 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Chat.cs" />
     <Compile Include="CollisionSystem\CollisionDetectionService.cs" />
     <Compile Include="CollisionSystem\GameObjectCollidable.cs" />
     <Compile Include="CollisionSystem\IManageCollisionsService.cs" />
@@ -95,7 +94,6 @@
     <Compile Include="GameObjects\InvicibleWall.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\Star.cs" />
-    <Compile Include="GcTimer.cs" />
     <Compile Include="Input\IInputService.cs" />
     <Compile Include="Input\InputManager.cs" />
     <Compile Include="Managers\AudioManager.cs" />
