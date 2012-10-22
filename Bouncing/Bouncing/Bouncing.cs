@@ -38,10 +38,10 @@ namespace Bouncing
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
        
-            /*
+            
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            */
+            
 
             screenSystem = new ScreenSystem(this);
             Components.Add(screenSystem);
