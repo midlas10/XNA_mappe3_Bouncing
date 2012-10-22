@@ -63,7 +63,7 @@ namespace Bouncing
             //them again
 
             //Initialize the entry and add it to the list.
-            back = new MainMenuEntry(this, "Back to parent menu");
+            back = new MainMenuEntry(this, "Back");
             MenuEntries.Add(back);
         }
 

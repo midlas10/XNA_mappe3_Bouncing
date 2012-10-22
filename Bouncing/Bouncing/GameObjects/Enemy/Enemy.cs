@@ -33,9 +33,9 @@ namespace Bouncing.GameObjects
 
         public void LoadContent()
         {
-            image = game.Content.Load<Texture2D>(@"Images/Enemies/vortex");
-            collisionBox.Width = (image.Width / imageSize.X) - (collisionBoxReduction.X * 2);
-            collisionBox.Height = (image.Height / imageSize.Y) - (collisionBoxReduction.Y * 2);
+            //image = game.Content.Load<Texture2D>(@"Images/Enemies/vortex");
+            //collisionBox.Width = (image.Width / imageSize.X) - (collisionBoxReduction.X * 2);
+            //collisionBox.Height = (image.Height / imageSize.Y) - (collisionBoxReduction.Y * 2);
             objectManager = (ObjectManager)game.Services.GetService(typeof(ObjectManager));
         }
 

@@ -24,6 +24,12 @@ namespace Bouncing
         private Player player;
         private Enemy enemy;
 
+
+        //AUDIO
+        AudioEngine audioEngine;
+        WaveBank waveBank;
+        SoundBank soundBank;
+        Cue trackCue;
        
         public Bouncing()
         {
@@ -60,6 +66,8 @@ namespace Bouncing
             screenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
             clearColor = new Color(70, 132, 143);
 
+            objectManager = new ObjectManager(this);
+
             Settings.MusicVolume = 1.0f;
             Settings.MusicVolume = 1.0f;
 
@@ -72,18 +80,14 @@ namespace Bouncing
             spriteBatch = new SpriteBatch(GraphicsDevice);
             objectManager.SetSpritebatch(spriteBatch);
 
-
-
             /*
-            AudioEngine audio = new AudioEngine(Content.RootDirectory + "//Audio//gameIntro.xgs");
-            WaveBank waveBank = new WaveBank(audio, Content.RootDirectory + "//Audio//Wave bank.xwb");
-            SoundBank soundBank = new SoundBank(audio, Content.RootDirectory + "//Audio//Sound Bank.xsb");
-
-            AudioManager manager = new AudioManager(audio, waveBank, soundBank);
+            audioEngine = new AudioEngine(@"Audio/test.xgs");
+            waveBank = new WaveBank(audioEngine, @"Audio/test2.xwb");
+            soundBank = new SoundBank(audioEngine, @"Audio/test3.xsb");
             */
-
+             
             Background tempBack = new Background(Content.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
-            objectManager.RegisterObject(tempBack);
+            //objectManager.RegisterObject(tempBack);
 
             player = new Player(this, spriteBatch, 
                 new Vector2(graphics.PreferredBackBufferWidth / 2, 

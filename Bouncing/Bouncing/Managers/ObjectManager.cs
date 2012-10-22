@@ -53,8 +53,11 @@ namespace Bouncing.Managers
             {
                 go.Draw(gameTime);
             }
-            base.Draw(gameTime);
+            
             spriteBatch.End();
+
+
+            //base.Draw(gameTime);
         }
 
         /// <summary>

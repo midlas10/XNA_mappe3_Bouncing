@@ -18,8 +18,8 @@ namespace Bouncing.GameObjects
         {
             spriteBatch = spriteBatchToUse;
             game = baseGame;
-            starArt = game.Content.Load<Texture2D>(@"Collectibles/Level1/star");
-            collisionBox = new Rectangle((int) position.X, (int) position.Y, 50, 50);
+            //starArt = game.Content.Load<Texture2D>(@"Collectibles/Level1/star");
+            //collisionBox = new Rectangle((int) position.X, (int) position.Y, 50, 50);
             if (omReference == null)
             {
                 omReference = (ObjectManager)game.Services.GetService(typeof(ObjectManager));

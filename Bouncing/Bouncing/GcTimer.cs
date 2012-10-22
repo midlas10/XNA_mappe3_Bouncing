@@ -76,11 +76,11 @@ namespace Bouncing
 
         public override void Draw(GameTime gameTime)
         {
-            frameCounter++;
-            sb.Begin();
-            sb.DrawString(font1, "FPS: " + fps, new Vector2(1,1), Color.Black);
-            sb.DrawString(font1, "FPS: " + fps, Vector2.Zero, Color.White);
-            sb.End();
+            //frameCounter++;
+            //sb.Begin();
+            //sb.DrawString(font1, "FPS: " + fps, new Vector2(1,1), Color.Black);
+            //sb.DrawString(font1, "FPS: " + fps, Vector2.Zero, Color.White);
+            //sb.End();
             base.Draw(gameTime);
         }
     }
