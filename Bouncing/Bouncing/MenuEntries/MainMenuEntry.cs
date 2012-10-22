@@ -16,6 +16,13 @@ namespace Bouncing
 
         }
 
+        public ObjectManager ObjectManager
+        {
+            get { return objectManager; }
+            internal set { objectManager = value; }
+        }
+        ObjectManager objectManager;
+
         public override void AnimateHighlighted(GameTime gameTime)
         {
             //Gives the active entry a pulsating effect

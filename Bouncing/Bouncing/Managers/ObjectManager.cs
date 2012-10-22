@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 
 namespace Bouncing
 {
@@ -23,6 +24,11 @@ namespace Bouncing
         {
             objects = new List<GameObject>();
             objectsToRemove = new Queue<GameObject>();
+        }
+
+        public ObjectManager Content
+        {
+            get { return Game.Content; }
         }
 
         public ObjectManager(PlayScreen playScreen)
@@ -54,7 +60,7 @@ namespace Bouncing
 
         public override void Draw(GameTime gameTime)
         {
-            /*
+            
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             //Draw all the objects in the objectlist);
             foreach (GameObject go in objects)
@@ -63,7 +69,7 @@ namespace Bouncing
             }
             
             spriteBatch.End();
-            */
+            
 
             base.Draw(gameTime);
         }

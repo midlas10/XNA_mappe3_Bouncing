@@ -43,6 +43,8 @@ namespace Bouncing
         {
             objectManager = new ObjectManager(this);
             collisionDetectionService = new CollisionDetectionService(this);
+            clearColor = new Color(70, 132, 143);
+
 
             //levelManager = new LevelManager();
 
@@ -73,10 +75,10 @@ namespace Bouncing
         public override void LoadContent()
         {
             spriteBatch = new SpriteBatch(graphics);
-
+            ContentManager content = 
             objectManager.SetSpritebatch(spriteBatch);
 
-            Background tempBack = new Background(ContentLoadException.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
+            Background tempBack = new Background(content.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
 
 
             player = new Player(this, spriteBatch,
