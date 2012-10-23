@@ -33,7 +33,7 @@ namespace Bouncing
             get { return cancelMenu; }
         }
 
-        MainMenuEntry back, lavaLevel;
+        MainMenuEntry back, lavaLevel, underwater;
 
 
         public LevelSelectScreen(MenuScreen parent)
@@ -66,10 +66,12 @@ namespace Bouncing
             //Initialize the entry and add it to the list.
 
             lavaLevel = new MainMenuEntry(this, "Lava world");
+            underwater = new MainMenuEntry(this, "Underwater");
             back = new MainMenuEntry(this, "Back");
 
             MenuEntries.Add(back);
             MenuEntries.Add(lavaLevel);
+            MenuEntries.Add(underwater);
         }
 
         public override void LoadContent()
@@ -87,10 +89,11 @@ namespace Bouncing
             
             back.SetPosition(new Vector2(100 + push.X, 200), true);
             lavaLevel.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), back, true);
+            underwater.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), lavaLevel, true);
             back.Selected += new EventHandler(back_Selected);
 
             lavaLevel.Selected += new EventHandler(lavaLevel_Selected);
-
+            underwater.Selected += new EventHandler(underwater_Selected);
             //The title of the menu entry that activated this menu
             //Will be dynamic in build 0.9x           
             Title = "Select Level";
@@ -107,6 +110,10 @@ namespace Bouncing
             ExitScreen();
             ScreenSystem.AddScreen(new PlayScreen(1));
         }
-
+        void underwater_Selected(object sender, EventArgs e)
+        {
+            ExitScreen();
+            ScreenSystem.AddScreen(new PlayScreen(2));
+        }
     }
 }
