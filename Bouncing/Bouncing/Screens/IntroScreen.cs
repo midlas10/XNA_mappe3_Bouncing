@@ -40,7 +40,6 @@ namespace Bouncing
         {
             //Loads the MainMenuScreen when Intro is over
             ScreenSystem.AddScreen(new MainMenuScreen());
-            ScreenSystem.RemoveScreen(this);
         }
     }
 }

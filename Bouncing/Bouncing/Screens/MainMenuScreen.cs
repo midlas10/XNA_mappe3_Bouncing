@@ -98,7 +98,7 @@ namespace Bouncing
             SpriteFont = content.Load<SpriteFont>(@"Fonts/MenuFont");
             background = content.Load<Texture2D>(@"Images/menu");
 
-            
+
             levelSelect.SetPosition(new Vector2(100, 200), true);
             submenu.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), levelSelect, true);
             intro.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), submenu, true);
@@ -135,23 +135,20 @@ namespace Bouncing
 
         void PlaySelect(object sender, EventArgs e)
         {
-            Parent.ExitScreen();
+            ExitScreen();
             ScreenSystem.AddScreen(new PlayScreen());
-            ScreenSystem.RemoveScreen(this);
         }
 
 
         void IntroSelect(object sender, EventArgs e)
         {
-            Parent.ExitScreen();
+            ExitScreen();
             ScreenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
-            ScreenSystem.RemoveScreen(this);
         }
 
         void QuitSelect(object sender, EventArgs e)
         {
             ExitScreen();
-            ScreenSystem.Game.Exit();
         }
 
 

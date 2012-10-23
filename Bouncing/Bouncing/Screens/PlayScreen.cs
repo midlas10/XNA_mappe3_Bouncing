@@ -28,6 +28,7 @@ namespace Bouncing
         Color titleColor, descriptionColor;
         SpriteFont font;
         InputSystem input;
+        string songTitle;
 
         GraphicsDevice graphics;
         InputManager _input;
@@ -40,6 +41,7 @@ namespace Bouncing
         private ILevel curLevel;
         private int level;
         private LevelManager levelManager;
+        private AudioManager audioManager;
 
         public int starsCollected { get; set; }
 
@@ -67,6 +69,25 @@ namespace Bouncing
             {
                 curLevel = levelManager.GetLevel(level);
             }
+
+
+            //Inits the audio
+            switch (level)
+            {
+                case 1:
+                    audioManager = new AudioManager("spacetheme");
+                    break;
+                case 2:
+                    audioManager = new AudioManager("spacetheme");
+                    break;
+                case 3:
+                    audioManager = new AudioManager("lavatheme");
+                    break;
+            }
+
+            audioManager.LoadContent();
+
+
             objectManager = (ObjectManager)ScreenSystem.Game.Services.GetService((typeof(ObjectManager)));
             collisionManager = (IManageCollisionsService)ScreenSystem.Game.Services.GetService((typeof(IManageCollisionsService)));
             _input = (InputManager)ScreenSystem.Game.Services.GetService(typeof(IInputService));
@@ -120,9 +141,7 @@ namespace Bouncing
                 
                 else if (curLevel.GameOver())
                 {
-                    curLevel.UnLoadContent();
                     ExitScreen();
-                    ScreenSystem.RemoveScreen(this);
                     ScreenSystem.AddScreen(new GameOverScreen(this));
                 }
 
@@ -130,7 +149,6 @@ namespace Bouncing
             {
                 ExitScreen();
                 ScreenSystem.AddScreen(new MainMenuScreen());
-                ScreenSystem.RemoveScreen(this);
             }
         }
 

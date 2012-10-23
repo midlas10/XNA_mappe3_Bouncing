@@ -17,8 +17,8 @@ namespace Bouncing.Levels
 
 
             player = new Player(TheGame, TheSpriteBatch,
-                new Vector2(700,
-                    700));
+                new Vector2(300,
+                    300));
             player.LoadContent();
 
             //Loading the Enemy Sprites
@@ -41,19 +41,11 @@ namespace Bouncing.Levels
 
         public override void UnLoadContent()
         {
-            levelLoaded = false;
-            player = null;
-            enemy = null;
-            spawnManager = null;
             base.UnLoadContent();
         }
 
         public override bool LevelDone()
         {
-            if (player.GetTotalStarsCollected() >= 9)
-            {
-                return true;
-            }
             return false;
         }
 
@@ -64,7 +56,7 @@ namespace Bouncing.Levels
 
         public override bool GameOver()
         {
-            return player.IsDead();
+            return false;
         }
     }
 }

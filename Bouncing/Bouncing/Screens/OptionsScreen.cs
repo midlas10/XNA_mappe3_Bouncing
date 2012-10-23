@@ -91,8 +91,6 @@ namespace Bouncing
         void back_Selected(object sender, EventArgs e)
         {
             MenuCancel();
-            ScreenSystem.AddScreen(new MainMenuScreen());
-            ScreenSystem.RemoveScreen(this);
         }
     }
 }

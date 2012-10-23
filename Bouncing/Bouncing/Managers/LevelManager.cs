@@ -30,7 +30,7 @@ namespace Bouncing.Managers
 
         public ILevel NextLevel()
         {
-            if (Levels.Count >= (CurLevelNR + 1))
+            if (Levels.Count <= (CurLevelNR + 1))
             {
                 ILevel temp = Levels[CurLevelNR];
                 temp.Init(TheGame, TheSpriteBatch);

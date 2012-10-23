@@ -24,15 +24,6 @@ namespace Bouncing
         private ObjectManager objectManager;
         private IManageCollisionsService collisionDetectionService;
 
-        AudioEngine audioEngine;
-        WaveBank waveBank;
-        SoundBank soundBank;
-        Cue trackCue;
-
-        public void PlayCue(string cueName)
-        {
-            soundBank.PlayCue(cueName);
-        }
 
         public Bouncing()
         {
@@ -58,8 +49,6 @@ namespace Bouncing
 
         protected override void Initialize()
         {
-            
-
             Settings.MusicVolume = 1.0f;
             Settings.MusicVolume = 1.0f;
 
@@ -71,14 +60,6 @@ namespace Bouncing
 
         protected override void LoadContent()
         {
-            //Loads the audioengine, wavebank and soundbank
-            audioEngine = new AudioEngine(@"Content/Audio/GameAudio.xgs");
-            waveBank = new WaveBank(audioEngine, @"Content/Audio/Wave Bank.xwb");
-            soundBank = new SoundBank(audioEngine, @"Content/Audio/Sound Bank.xsb");
-
-            trackCue = soundBank.GetCue("theme");
-            trackCue.Pause();
-
             objectManager.SetSpritebatch(screenSystem.SpriteBatch);
 
         }

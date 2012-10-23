@@ -41,16 +41,12 @@ namespace Bouncing.Levels
 
         public override void UnLoadContent()
         {
-            levelLoaded = false;
-            player = null;
-            enemy = null;
-            spawnManager = null;
             base.UnLoadContent();
         }
 
         public override bool LevelDone()
         {
-            if(player.GetTotalStarsCollected() >= 3)
+            if(player.GetTotalStarsCollected() >= 10)
             {
                 return true;
             }

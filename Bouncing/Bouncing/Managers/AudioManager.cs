@@ -8,10 +8,36 @@ namespace Bouncing
 {
     class AudioManager
     {
+        AudioEngine engine;
+        SoundBank sound;
+        WaveBank wave;
+        Cue trackCue;
 
-        public AudioManager(AudioEngine audio, WaveBank waveBank, SoundBank soundBank)
+        string songTitle;
+
+        public AudioManager(string title)
         {
-
+            songTitle = title;
         }
+
+        public void PlayCue(string cueName)
+        {
+            sound.PlayCue(cueName);
+        }
+
+
+        internal void LoadContent()
+        {
+            
+            
+            //Loads the audioengine, wavebank and soundbank
+            engine = new AudioEngine(@"Content/Audio/GameAudio.xgs");
+            sound = new SoundBank(engine, @"Content/Audio/Sound Bank.xsb");
+            wave = new WaveBank(engine, @"Content/Audio/Wave Bank.xwb");
+
+            trackCue = sound.GetCue(songTitle);
+            trackCue.Play();
+        }
+
     }
 }

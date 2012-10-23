@@ -110,7 +110,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Bouncing.cs" />
     <Compile Include="Screens\GameOverScreen.cs" />
-    <Compile Include="Screens\HelpScreen.cs" />
     <Compile Include="Screens\IntroScreen.cs" />
     <Compile Include="Screens\LevelSelectScreen.cs" />
     <Compile Include="Levels\BaseLevel.cs" />
