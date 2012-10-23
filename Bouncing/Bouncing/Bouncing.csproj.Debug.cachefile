@@ -1,15 +1,17 @@
 Content\SpriteFont1.xnb
 Content\Fonts\MenuFont.xnb
+Content\Fonts\GameFont.xnb
 Content\Maps\Level1\space.xnb
 Content\Maps\Level2\underwaterlvl.xnb
 Content\Images\Player\blob.xnb
 Content\Images\Enemies\vortex.xnb
 Content\Collectibles\Level1\star.xnb
-Content\Fonts\GameFont.xnb
 Content\Images\intro.xnb
 Content\Images\menu.xnb
 Content\Maps\Level3\lavalevel.xnb
-Content\Audio\star.xnb
+Content\Audio\Themes\lavatheme.xnb
+Content\Audio\Sounds\star.xnb
+Content\Audio\Themes\theme.xnb
 Content\Audio\GameAudio.xgs
 Content\Audio\Wave Bank.xwb
 Content\Audio\Sound Bank.xsb

@@ -33,12 +33,15 @@ namespace Bouncing
         InputManager _input;
         ScreenSystem screenSystem;
 
+        private ScreenOverlayManager screenOverlayManager;
         private ObjectManager objectManager;
         private IManageCollisionsService collisionManager;
 
         private ILevel curLevel;
         private int level;
         private LevelManager levelManager;
+
+        public int starsCollected { get; set; }
 
         public PlayScreen()
         {
@@ -53,7 +56,7 @@ namespace Bouncing
 
         public override void Initialize()
         {
-            
+            starsCollected = 1;
             levelManager = new LevelManager();
             levelManager.Init(ScreenSystem.Game, ScreenSystem.SpriteBatch);
             if (level == 0)
@@ -69,6 +72,8 @@ namespace Bouncing
             _input = (InputManager)ScreenSystem.Game.Services.GetService(typeof(IInputService));
             input = ScreenSystem.InputSystem;
             input.NewAction("Pause", Keys.Escape);
+            screenOverlayManager = new ScreenOverlayManager(ScreenSystem.Game, this);
+            ScreenSystem.Game.Components.Add(screenOverlayManager);
             Entering += new TransitionEventHandler(PlayScreen_Entering);
         }
 
