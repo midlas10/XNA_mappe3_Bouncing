@@ -17,7 +17,7 @@ namespace Bouncing.Levels
 
 
             player = new Player(TheGame, TheSpriteBatch,
-                new Vector2(300,
+                new Vector2(700,
                     300));
             player.LoadContent();
 
@@ -46,6 +46,10 @@ namespace Bouncing.Levels
 
         public override bool LevelDone()
         {
+            if(player.GetTotalStarsCollected() >= 10)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -56,7 +60,7 @@ namespace Bouncing.Levels
 
         public override bool GameOver()
         {
-            return false;
+            return player.IsDead();
         }
     }
 }

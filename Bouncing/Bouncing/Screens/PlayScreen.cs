@@ -106,17 +106,25 @@ namespace Bouncing
                 {
                     curLevel.LoadContent();
                 }
-            }
 
-
-            collisionManager.Update(gameTime);
-            objectManager.Update(gameTime);
-            if (curLevel != null)
-            {
+                collisionManager.Update(gameTime);
+                objectManager.Update(gameTime);
                 curLevel.Update(gameTime);
-            }
 
-            //base.Update(gameTime);
+                if (curLevel.LevelDone())
+                {
+                    curLevel.UnLoadContent();
+                    curLevel = levelManager.NextLevel();
+                } else if (curLevel.GameOver())
+                {
+                    ExitScreen();
+                    ScreenSystem.AddScreen(new MainMenuScreen());
+                }
+            } else 
+            {
+                ExitScreen();
+                ScreenSystem.AddScreen(new MainMenuScreen());
+            }
         }
 
         public override void HandleInput()

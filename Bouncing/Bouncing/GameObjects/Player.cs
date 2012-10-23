@@ -23,6 +23,9 @@ namespace Bouncing
         protected IManageCollisionsService collisionManager;
         protected IInputService _input;
 
+        protected bool dead;
+        protected int StarsCollected;
+
         Point frameSize = new Point(300, 300);
         Point currentFrame = new Point(0, 0);
         Point imageSize = new Point(3, 3);
@@ -35,6 +38,8 @@ namespace Bouncing
             SpriteHeight = 300;
             SpriteWidth = 300;
             collisionBox = new Rectangle((int) position.X, (int) position.Y, 100, 100);
+            dead = false;
+            StarsCollected = 0;
         }
 
         public void LoadContent()
@@ -148,10 +153,8 @@ namespace Bouncing
             }
             #endregion
 
-
             collisionBox = new Rectangle((int)position.X, (int)position.Y, 100, 100);
 
-            
             base.Update(gameTime);
         }
 
@@ -177,14 +180,25 @@ namespace Bouncing
         {
             if(goc as Enemy != null)
             {
-                //System.Console.Write("collision");
+                dead = true;
                 return;
             }
             if(goc as Star != null)
             {
+                StarsCollected++;
                 //System.Console.Write("Star collision");
                 return;
             }
+        }
+
+        public bool IsDead()
+        {
+            return dead;
+        }
+
+        public int GetTotalStarsCollected()
+        {
+            return StarsCollected;
         }
     }
 }
