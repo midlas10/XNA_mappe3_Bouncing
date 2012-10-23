@@ -135,20 +135,23 @@ namespace Bouncing
 
         void PlaySelect(object sender, EventArgs e)
         {
-            ExitScreen();
+            Parent.ExitScreen();
             ScreenSystem.AddScreen(new PlayScreen());
+            ScreenSystem.RemoveScreen(this);
         }
 
 
         void IntroSelect(object sender, EventArgs e)
         {
-            ExitScreen();
+            Parent.ExitScreen();
             ScreenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
+            ScreenSystem.RemoveScreen(this);
         }
 
         void QuitSelect(object sender, EventArgs e)
         {
             ExitScreen();
+            ScreenSystem.Game.Exit();
         }
 
 
