@@ -96,9 +96,6 @@ namespace Bouncing
         {
             seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
        
-
-            //AudioManager.singleton.Update();
-
             if (curLevel != null)
             {
                 if (!curLevel.IsLevelLoaded())
@@ -143,7 +140,6 @@ namespace Bouncing
             
             objectManager.Draw(gameTime);
 
-            //base.Draw(gameTime);
         }
     }
 }

@@ -2,11 +2,15 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Bouncing
 {
     public class Player : GameObjectCollidable
     {
+        SoundEffect soundEffect;
+        SoundEffectInstance soundeffectinstance;
+
         protected float movementPerSecond = (float)500;
         protected SpriteBatch spriteBatch;
         protected Game game;
@@ -44,6 +48,11 @@ namespace Bouncing
 
         public void LoadContent()
         {
+
+            soundEffect = game.Content.Load<SoundEffect>(@"Audio/star");
+            soundeffectinstance = soundEffect.CreateInstance();
+
+
 
             image = game.Content.Load<Texture2D>(@"Images/Player/blob");
             collisionBox.Width = 100;
@@ -189,6 +198,10 @@ namespace Bouncing
             {
                 StarsCollected++;
                 //System.Console.Write("Star collision");
+
+                soundeffectinstance.Volume = 0.9f;
+                soundeffectinstance.Play();
+
                 return;
             }
         }
