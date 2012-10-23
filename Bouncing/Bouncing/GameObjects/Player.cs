@@ -52,6 +52,8 @@ namespace Bouncing
             objectManager = (ObjectManager) game.Services.GetService(typeof (ObjectManager));
             collisionManager = (IManageCollisionsService) game.Services.GetService((typeof (IManageCollisionsService)));
             _input = (IInputService) game.Services.GetService(typeof (IInputService));
+
+           
         }
 
         public override void Update(GameTime gameTime)
