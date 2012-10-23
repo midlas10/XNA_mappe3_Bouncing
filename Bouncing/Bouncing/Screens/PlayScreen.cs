@@ -114,11 +114,14 @@ namespace Bouncing
                 {
                     curLevel.UnLoadContent();
                     curLevel = levelManager.NextLevel();
-                } else if (curLevel.GameOver())
+                } 
+                
+                else if (curLevel.GameOver())
                 {
                     ExitScreen();
-                    ScreenSystem.AddScreen(new MainMenuScreen());
+                    ScreenSystem.AddScreen(new GameOverScreen(this));
                 }
+
             } else 
             {
                 ExitScreen();
@@ -131,7 +134,7 @@ namespace Bouncing
             if (input.NewActionPress("Pause"))
             {
                 FreezeScreen();
-                ScreenSystem.AddScreen(new GameOverScreen(this));
+                ScreenSystem.AddScreen(new PauseScreen(this));
             }
         }
 
