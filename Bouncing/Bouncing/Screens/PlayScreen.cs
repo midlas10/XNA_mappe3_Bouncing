@@ -96,10 +96,9 @@ namespace Bouncing
         {
             seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
        
-            //if (_input.IsKeyDown(Keys.Escape))
-            //    this.Exit();
 
             //AudioManager.singleton.Update();
+
             if (curLevel != null)
             {
                 if (!curLevel.IsLevelLoaded())
@@ -132,7 +131,7 @@ namespace Bouncing
             if (input.NewActionPress("Pause"))
             {
                 FreezeScreen();
-                ScreenSystem.AddScreen(new PauseScreen(this));
+                ScreenSystem.AddScreen(new GameOverScreen(this));
             }
         }
 

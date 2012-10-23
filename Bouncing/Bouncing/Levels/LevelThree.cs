@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Bouncing.Levels
 {
-    class LevelTwo : BaseLevel
+    class LevelThree : BaseLevel
     {
 
         private Player player;
@@ -13,7 +13,7 @@ namespace Bouncing.Levels
 
         public override void LoadContent()
         {
-            Background tempBack = new Background(TheGame.Content.Load<Texture2D>(@"Maps/Level2/underwaterlvl"), TheSpriteBatch);
+            Background tempBack = new Background(TheGame.Content.Load<Texture2D>(@"Maps/Level3/lavalevel"), TheSpriteBatch);
 
 
             player = new Player(TheGame, TheSpriteBatch,

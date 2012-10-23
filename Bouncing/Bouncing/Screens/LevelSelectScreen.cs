@@ -33,14 +33,14 @@ namespace Bouncing
             get { return cancelMenu; }
         }
 
-        MainMenuEntry back, lavaLevel, underwater;
+        MainMenuEntry back, 
+            spaceLevel,
+            lavaLevel, 
+            underwater;
 
 
         public LevelSelectScreen(MenuScreen parent)
         {
-            //Like the pause screen, we will reset the parent to active
-            //when this screen is finished.  Therefore, we must have a reference
-            //to the parent
             this.Parent = parent;
 
             //Load the action titles
@@ -65,13 +65,15 @@ namespace Bouncing
 
             //Initialize the entry and add it to the list.
 
-            lavaLevel = new MainMenuEntry(this, "Lava world");
-            underwater = new MainMenuEntry(this, "Underwater");
+            spaceLevel = new MainMenuEntry(this, "Space Vortex");
+            underwater = new MainMenuEntry(this, "Bubbly Waters");
+            lavaLevel = new MainMenuEntry(this, "Molten Fields");
             back = new MainMenuEntry(this, "Back");
 
-            MenuEntries.Add(back);
-            MenuEntries.Add(lavaLevel);
+            MenuEntries.Add(spaceLevel);
             MenuEntries.Add(underwater);
+            MenuEntries.Add(lavaLevel);
+            MenuEntries.Add(back);
         }
 
         public override void LoadContent()
@@ -87,15 +89,20 @@ namespace Bouncing
                     ((MenuScreen)Parent).SpriteFont.MeasureString(((MenuScreen)Parent).MenuEntries[0].EntryTitle);
 
             
-            back.SetPosition(new Vector2(100 + push.X, 200), true);
-            lavaLevel.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), back, true);
-            underwater.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), lavaLevel, true);
+            
+
+            spaceLevel.SetPosition(new Vector2(100 + push.X, 200), true);
+            underwater.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), spaceLevel, true);
+            lavaLevel.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), underwater, true);
+            back.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), lavaLevel, true);
+            
+            
+            spaceLevel.Selected += new EventHandler(spaceLevel_Selected);
+            underwater.Selected += new EventHandler(underwater_Selected);
+            lavaLevel.Selected += new EventHandler(lavaLevel_Selected);
             back.Selected += new EventHandler(back_Selected);
 
-            lavaLevel.Selected += new EventHandler(lavaLevel_Selected);
-            underwater.Selected += new EventHandler(underwater_Selected);
-            //The title of the menu entry that activated this menu
-            //Will be dynamic in build 0.9x           
+
             Title = "Select Level";
             OffsetTitle = new Vector2(-150, 0);
         }
@@ -105,7 +112,7 @@ namespace Bouncing
             MenuCancel();
         }
 
-        void lavaLevel_Selected(object sender, EventArgs e)
+        void spaceLevel_Selected(object sender, EventArgs e)
         {
             ExitScreen();
             ScreenSystem.AddScreen(new PlayScreen(1));
@@ -115,5 +122,12 @@ namespace Bouncing
             ExitScreen();
             ScreenSystem.AddScreen(new PlayScreen(2));
         }
+        void lavaLevel_Selected(object sender, EventArgs e)
+        {
+            ExitScreen();
+            ScreenSystem.AddScreen(new PlayScreen(3));
+        }
+        
+        
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Bouncing
 {
-    public class Enemy : GameObjectCollidable
+    public class Vortex : GameObjectCollidable
     {
         protected Texture2D image;
         protected Game game;
@@ -15,12 +15,12 @@ namespace Bouncing
         Point collisionBoxReduction = new Point(50,50);
         Point currentFrame = new Point(0, 0);
         Point imageSize = new Point(3, 3);
-        Point velocity = new Point(1,3); //test
+        Point velocity = new Point(1,3); 
 
         int timeSinceLastFrame = 0;
         int msPerFrame = 200;
 
-        public Enemy(Game baseGame, SpriteBatch spriteBatchToUse, Vector2 position)
+        public Vortex(Game baseGame, SpriteBatch spriteBatchToUse, Vector2 position)
             : base(position)
         {
             spriteBatch = spriteBatchToUse;
@@ -65,10 +65,7 @@ namespace Bouncing
             
             collisionBox.X = (int) (position.X + collisionBoxReduction.X);
             collisionBox.Y = (int)(position.Y + collisionBoxReduction.Y);
-            /*
-            collisionBox.Width += collisionBoxReduction.X;
-            collisionBox.Height += collisionBoxReduction.Y;
-            */
+            
 
             if (collisionBox.X <= 0)
                 velocity.X = -velocity.X;

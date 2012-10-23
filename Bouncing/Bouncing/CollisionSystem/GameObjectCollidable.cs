@@ -47,6 +47,14 @@ namespace Bouncing
         }
 
 
+        //Plays a sound if player is hit
+        public string collisionCueName
+        {
+            get;
+            private set;
+        }
+
+
         protected Rectangle collisionBox;
         protected Vector2 position;
 

@@ -34,7 +34,7 @@ namespace Bouncing
             get { return cancelMenu; }
         }
 
-        MainMenuEntry play, levelSelect, submenu, intro, quit;
+        MainMenuEntry levelSelect, submenu, intro, quit;
 
         SpriteBatch spriteBatch;
         Texture2D background;
@@ -69,8 +69,7 @@ namespace Bouncing
             input.NewAction(MenuCancelActionName, Keys.Escape);
 
             //Initialize the entries
-            play = new MainMenuEntry(this, "Play");
-            levelSelect = new MainMenuEntry(this, "Select Level");
+            levelSelect = new MainMenuEntry(this, "Play");
             submenu = new MainMenuEntry(this, "Options");
             intro = new MainMenuEntry(this, "Intro");
             quit = new MainMenuEntry(this, "Quit Game");
@@ -81,14 +80,12 @@ namespace Bouncing
             Exiting += new TransitionEventHandler(MainMenuScreen_Exiting);
 
             //Set up the entry events, and load a submenu.
-            play.Selected += new EventHandler(PlaySelect);
             levelSelect.AddSubMenu(new LevelSelectScreen(this));
             submenu.AddSubMenu(new OptionsScreen(this));
             intro.Selected += new EventHandler(IntroSelect);
             quit.Selected += new EventHandler(QuitSelect);
 
             //Finally, add all entries to the list
-            MenuEntries.Add(play);
             MenuEntries.Add(levelSelect);
             MenuEntries.Add(submenu);
             MenuEntries.Add(intro);
@@ -101,13 +98,12 @@ namespace Bouncing
             SpriteFont = content.Load<SpriteFont>(@"Fonts/MenuFont");
             background = content.Load<Texture2D>(@"Images/menu");
 
-            //Vector2 test = new Vector2(100, 200);
-
-            play.SetPosition(new Vector2(100, 200), true);
-            levelSelect.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), play, true);
+            
+            levelSelect.SetPosition(new Vector2(100, 200), true);
             submenu.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), levelSelect, true);
             intro.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), submenu, true);
             quit.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), intro, true);
+
         }
 
         public override void UnloadContent()

@@ -8,7 +8,7 @@ namespace Bouncing.Levels
     {
 
         private Player player;
-        private Enemy enemy;
+        private Vortex enemy;
         private SpawnManager spawnManager;
 
         public override void LoadContent()
@@ -22,7 +22,7 @@ namespace Bouncing.Levels
             player.LoadContent();
 
             //Loading the Enemy Sprites
-            enemy = new Enemy(TheGame, TheSpriteBatch,
+            enemy = new Vortex(TheGame, TheSpriteBatch,
                 new Vector2(200,
                     200));
             enemy.LoadContent();

@@ -178,7 +178,7 @@ namespace Bouncing
 
         public override void Collision(GameObjectCollidable goc)
         {
-            if(goc as Enemy != null)
+            if(goc as Vortex != null)
             {
                 dead = true;
                 return;

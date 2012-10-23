@@ -22,8 +22,10 @@ namespace Bouncing.Managers
 
             ILevel levelOne = new LevelOne();
             ILevel levelTwo = new LevelTwo();
+            ILevel levelThree = new LevelThree();
             Levels.Add(levelOne);
             Levels.Add(levelTwo);
+            Levels.Add(levelThree);
         }
 
         public ILevel NextLevel()

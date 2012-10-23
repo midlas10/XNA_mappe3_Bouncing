@@ -91,13 +91,14 @@
     <Compile Include="CollisionSystem\IManageCollisionsService.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameObjects\Background.cs" />
-    <Compile Include="GameObjects\Enemy\Enemy.cs" />
+    <Compile Include="GameObjects\Enemy\Vortex.cs" />
     <Compile Include="GameObjects\InvicibleWall.cs" />
     <Compile Include="GameObjects\Player.cs" />
     <Compile Include="GameObjects\SpawnManager.cs" />
     <Compile Include="GameObjects\Star.cs" />
     <Compile Include="Input\IInputService.cs" />
     <Compile Include="Input\InputManager.cs" />
+    <Compile Include="Levels\LevelThree.cs" />
     <Compile Include="Levels\LevelTwo.cs" />
     <Compile Include="Managers\AudioManager.cs" />
     <Compile Include="Managers\IManageLevels.cs" />
@@ -119,7 +120,6 @@
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\PlayScreen.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="Managers\SpriteManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
