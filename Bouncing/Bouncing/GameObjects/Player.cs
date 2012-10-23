@@ -174,12 +174,12 @@ namespace Bouncing
         {
             if(goc as Enemy != null)
             {
-                System.Console.Write("collision");
+                //System.Console.Write("collision");
                 return;
             }
             if(goc as Star != null)
             {
-                System.Console.Write("Star collision");
+                //System.Console.Write("Star collision");
                 return;
             }
         }

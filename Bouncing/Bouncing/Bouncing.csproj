@@ -93,6 +93,7 @@
     <Compile Include="GameObjects\Enemy\Enemy.cs" />
     <Compile Include="GameObjects\InvicibleWall.cs" />
     <Compile Include="GameObjects\Player.cs" />
+    <Compile Include="GameObjects\SpawnManager.cs" />
     <Compile Include="GameObjects\Star.cs" />
     <Compile Include="Input\IInputService.cs" />
     <Compile Include="Input\InputManager.cs" />

@@ -61,7 +61,7 @@ namespace Bouncing
 
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            objectManager.SetSpritebatch(screenSystem.SpriteBatch);
 
         }
 
@@ -73,6 +73,7 @@ namespace Bouncing
         
         protected override void Update(GameTime gameTime)
         {
+            _input.Update(gameTime);
             base.Update(gameTime);
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bouncing.Managers;
 using ScreenSystemLibrary;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
@@ -28,9 +29,10 @@ namespace Bouncing
         InputSystem input;
 
         GraphicsDevice graphics;
-        SpriteBatch spriteBatch;
         InputManager _input;
         ScreenSystem screenSystem;
+
+        private SpawnManager spawnManager;
 
         private ObjectManager objectManager;
         private IManageCollisionsService collisionManager;
@@ -40,19 +42,17 @@ namespace Bouncing
 
         public PlayScreen()
         {
-            
-            objectManager = (ObjectManager) ScreenSystem.Game.Services.GetService(typeof (GameObject));
-            collisionManager = (IManageCollisionsService)ScreenSystem.Game.Services.GetService((typeof(IManageCollisionsService)));
 
         }
 
         public override void Initialize()
         {
-            //objectManager = new ObjectManager(this);
-
+            objectManager = (ObjectManager)ScreenSystem.Game.Services.GetService((typeof(ObjectManager)));
+            collisionManager = (IManageCollisionsService)ScreenSystem.Game.Services.GetService((typeof(IManageCollisionsService)));
+            _input = (InputManager)ScreenSystem.Game.Services.GetService(typeof(IInputService));
             input = ScreenSystem.InputSystem;
             input.NewAction("Pause", Keys.Escape);
-
+            spawnManager = new SpawnManager(ScreenSystem.Game, ScreenSystem.SpriteBatch);
             Entering += new TransitionEventHandler(PlayScreen_Entering);
         }
 
@@ -64,39 +64,36 @@ namespace Bouncing
 
         public override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(graphics);
-            objectManager.SetSpritebatch(spriteBatch);
-
-            Background tempBack = new Background(ScreenSystem.Game.Content.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
+            
+            Background tempBack = new Background(ScreenSystem.Game.Content.Load<Texture2D>(@"Maps/Level1/space"), ScreenSystem.SpriteBatch);
 
 
-            player = new Player(ScreenSystem.Game, spriteBatch,
+            player = new Player(ScreenSystem.Game, ScreenSystem.SpriteBatch,
                 new Vector2(300,
                     300));
             player.LoadContent();
 
-
-            objectManager.RegisterObject(player);
-            collisionManager.RegisterObject(player);
-
-
             //Loading the Enemy Sprites
-            enemy = new Enemy(ScreenSystem.Game, spriteBatch,
+            enemy = new Enemy(ScreenSystem.Game, ScreenSystem.SpriteBatch,
                 new Vector2(200,
                     200));
             enemy.LoadContent();
 
 
             //Loading the Collectibles
-            Star test = new Star(screenSystem.Game,
+            Star test = new Star(ScreenSystem.Game,
                 new Vector2(600,
-                    200), spriteBatch);
+                    200), ScreenSystem.SpriteBatch);
 
             //Object Manager
+            objectManager.RegisterObject(tempBack);
             objectManager.RegisterObject(test);
             objectManager.RegisterObject(enemy);
+            objectManager.RegisterObject(player);
+            collisionManager.RegisterObject(player);
             collisionManager.RegisterObject(enemy);
             collisionManager.RegisterObject(test);
+            
             base.LoadContent();
 
             ContentManager content = ScreenSystem.Content;
@@ -111,20 +108,18 @@ namespace Bouncing
         protected override void UpdateScreen(GameTime gameTime)
         {
             seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        
-
-            _input.Update(gameTime);
+       
             //if (_input.IsKeyDown(Keys.Escape))
             //    this.Exit();
 
             //AudioManager.singleton.Update();
 
-
+            spawnManager.Update(gameTime);
             collisionManager.Update(gameTime);
             objectManager.Update(gameTime);
 
 
-            base.Update(gameTime);
+            //base.Update(gameTime);
         }
 
         public override void HandleInput()
@@ -138,8 +133,10 @@ namespace Bouncing
 
         protected override void DrawScreen(GameTime gameTime)
         {
+            
             objectManager.Draw(gameTime);
-            base.Draw(gameTime);
+            
+            //base.Draw(gameTime);
         }
     }
 }

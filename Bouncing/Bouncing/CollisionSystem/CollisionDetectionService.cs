@@ -10,34 +10,24 @@ namespace Bouncing
     /// create other collisionsystems and still have the game function as intended, because the interface function
     /// is still the same, meaning that all objects making use of the interface will notice no change in the system.
     /// </summary>
-    public class CollisionDetectionService : Microsoft.Xna.Framework.GameComponent, IManageCollisionsService
+    public class CollisionDetectionService : IManageCollisionsService
     {
 
         protected List<GameObjectCollidable> collidables;
 
         public CollisionDetectionService(Game game)
-            : base(game)
         {
             collidables = new List<GameObjectCollidable>();
         }
 
-        /// <summary>
-        /// Allows the game component to perform any initialization it needs to before starting
-        /// to run.  This is where it can query for any required services and load content.
-        /// </summary>
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
 
         /// <summary>
         /// Performs maintenance of the collision system as well as a collision check on all objects
         /// currently registered.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public override void Update(GameTime gameTime)
+        public  void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             
             //Maintenance pass
             for (int i = 0; i < collidables.Count; i++)

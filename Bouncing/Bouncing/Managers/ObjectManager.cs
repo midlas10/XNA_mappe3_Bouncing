@@ -8,7 +8,7 @@ namespace Bouncing
     /// <summary>
     /// This is a game component that implements IUpdateable.
     /// </summary>
-    public class ObjectManager : DrawableGameComponent
+    public class ObjectManager
     {
 
         protected List<GameObject> objects;
@@ -20,7 +20,6 @@ namespace Bouncing
         private PlayScreen playScreen;
 
         public ObjectManager(Game game)
-            : base(game)
         {
             objects = new List<GameObject>();
             objectsToRemove = new Queue<GameObject>();
@@ -30,7 +29,7 @@ namespace Bouncing
         /// Allows the game component to update itself.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             //First remove all the objects queued for removal.
             while (objectsToRemove.Count > 0)
@@ -44,23 +43,19 @@ namespace Bouncing
                 go.Update(gameTime);
             }
 
-            base.Update(gameTime);
         }
 
-        public override void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime)
         {
             
-            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+            //spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             //Draw all the objects in the objectlist);
             foreach (GameObject go in objects)
             {
                 go.Draw(gameTime);
             }
             
-            spriteBatch.End();
-            
-
-            base.Draw(gameTime);
+           // spriteBatch.End();
         }
 
         /// <summary>
