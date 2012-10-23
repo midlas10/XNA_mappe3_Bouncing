@@ -97,7 +97,10 @@
     <Compile Include="GameObjects\Star.cs" />
     <Compile Include="Input\IInputService.cs" />
     <Compile Include="Input\InputManager.cs" />
+    <Compile Include="Levels\LevelTwo.cs" />
     <Compile Include="Managers\AudioManager.cs" />
+    <Compile Include="Managers\IManageLevels.cs" />
+    <Compile Include="Managers\LevelManager.cs" />
     <Compile Include="Managers\ObjectManager.cs" />
     <Compile Include="MenuEntries\MainMenuEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,6 +110,9 @@
     <Compile Include="Screens\HelpScreen.cs" />
     <Compile Include="Screens\IntroScreen.cs" />
     <Compile Include="Screens\LevelSelectScreen.cs" />
+    <Compile Include="Levels\BaseLevel.cs" />
+    <Compile Include="Levels\ILevel.cs" />
+    <Compile Include="Levels\LevelOne.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Screens\OptionsScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />

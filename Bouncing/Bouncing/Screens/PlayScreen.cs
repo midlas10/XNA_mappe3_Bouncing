@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Bouncing.Levels;
 using Bouncing.Managers;
 using ScreenSystemLibrary;
 using Microsoft.Xna.Framework;
@@ -32,32 +33,42 @@ namespace Bouncing
         InputManager _input;
         ScreenSystem screenSystem;
 
-        private SpawnManager spawnManager;
-
         private ObjectManager objectManager;
         private IManageCollisionsService collisionManager;
 
-        private Player player;
-        private Enemy enemy;
+        private ILevel curLevel;
+        private int level;
+        private LevelManager levelManager;
 
         public PlayScreen()
         {
+            level = 1;
         }
 
         public PlayScreen(int level)
         {
-
+            this.level = level;
 
         }
 
         public override void Initialize()
         {
+            
+            levelManager = new LevelManager();
+            levelManager.Init(ScreenSystem.Game, ScreenSystem.SpriteBatch);
+            if (level == 0)
+            {
+                curLevel = levelManager.NextLevel();
+            }
+            else
+            {
+                curLevel = levelManager.GetLevel(level);
+            }
             objectManager = (ObjectManager)ScreenSystem.Game.Services.GetService((typeof(ObjectManager)));
             collisionManager = (IManageCollisionsService)ScreenSystem.Game.Services.GetService((typeof(IManageCollisionsService)));
             _input = (InputManager)ScreenSystem.Game.Services.GetService(typeof(IInputService));
             input = ScreenSystem.InputSystem;
             input.NewAction("Pause", Keys.Escape);
-            spawnManager = new SpawnManager(ScreenSystem.Game, ScreenSystem.SpriteBatch);
             Entering += new TransitionEventHandler(PlayScreen_Entering);
         }
 
@@ -69,35 +80,6 @@ namespace Bouncing
 
         public override void LoadContent()
         {
-            
-            Background tempBack = new Background(ScreenSystem.Game.Content.Load<Texture2D>(@"Maps/Level1/space"), ScreenSystem.SpriteBatch);
-
-
-            player = new Player(ScreenSystem.Game, ScreenSystem.SpriteBatch,
-                new Vector2(300,
-                    300));
-            player.LoadContent();
-
-            //Loading the Enemy Sprites
-            enemy = new Enemy(ScreenSystem.Game, ScreenSystem.SpriteBatch,
-                new Vector2(200,
-                    200));
-            enemy.LoadContent();
-
-
-            //Loading the Collectibles
-            Star test = new Star(ScreenSystem.Game,
-                new Vector2(600,
-                    200), ScreenSystem.SpriteBatch);
-
-            //Object Manager
-            objectManager.RegisterObject(tempBack);
-            objectManager.RegisterObject(test);
-            objectManager.RegisterObject(enemy);
-            objectManager.RegisterObject(player);
-            collisionManager.RegisterObject(player);
-            collisionManager.RegisterObject(enemy);
-            collisionManager.RegisterObject(test);
             
             base.LoadContent();
 
@@ -118,11 +100,21 @@ namespace Bouncing
             //    this.Exit();
 
             //AudioManager.singleton.Update();
+            if (curLevel != null)
+            {
+                if (!curLevel.IsLevelLoaded())
+                {
+                    curLevel.LoadContent();
+                }
+            }
 
-            spawnManager.Update(gameTime);
+
             collisionManager.Update(gameTime);
             objectManager.Update(gameTime);
-
+            if (curLevel != null)
+            {
+                curLevel.Update(gameTime);
+            }
 
             //base.Update(gameTime);
         }
