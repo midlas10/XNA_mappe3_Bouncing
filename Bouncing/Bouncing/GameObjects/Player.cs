@@ -49,7 +49,7 @@ namespace Bouncing
         public void LoadContent()
         {
 
-            soundEffect = game.Content.Load<SoundEffect>(@"Audio/star");
+            soundEffect = game.Content.Load<SoundEffect>(@"Audio/Sounds/star");
             soundeffectinstance = soundEffect.CreateInstance();
 
 
