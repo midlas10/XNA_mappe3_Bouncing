@@ -42,6 +42,11 @@ namespace Bouncing
 
         public PlayScreen()
         {
+        }
+
+        public PlayScreen(int level)
+        {
+
 
         }
 
@@ -135,8 +140,8 @@ namespace Bouncing
         {
             
             objectManager.Draw(gameTime);
-            
-            //base.Draw(gameTime);
+
+            base.Draw(gameTime);
         }
     }
 }

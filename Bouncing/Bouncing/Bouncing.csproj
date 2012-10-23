@@ -107,6 +107,7 @@
     <Compile Include="Screens\HelpScreen.cs" />
     <Compile Include="Screens\IntroScreen.cs" />
     <Compile Include="Screens\LevelSelectionScreen.cs" />
+    <Compile Include="Screens\LevelSelectScreen.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Screens\OptionsScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
