@@ -141,14 +141,17 @@ namespace Bouncing
                 
                 else if (curLevel.GameOver())
                 {
+                    curLevel.UnLoadContent();
                     ExitScreen();
-                    ScreenSystem.AddScreen(new GameOverScreen(this));
+                    ScreenSystem.RemoveScreen(this);
+
                 }
 
             } else 
             {
                 ExitScreen();
                 ScreenSystem.AddScreen(new MainMenuScreen());
+                ScreenSystem.RemoveScreen(this);
             }
         }
 

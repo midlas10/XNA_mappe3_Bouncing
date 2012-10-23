@@ -110,22 +110,27 @@ namespace Bouncing
         void back_Selected(object sender, EventArgs e)
         {
             MenuCancel();
+            ExitScreen();
+            ScreenSystem.AddScreen(new MainMenuScreen());
         }
 
         void spaceLevel_Selected(object sender, EventArgs e)
         {
             ExitScreen();
             ScreenSystem.AddScreen(new PlayScreen(1));
+            ScreenSystem.RemoveScreen(this);
         }
         void underwater_Selected(object sender, EventArgs e)
         {
             ExitScreen();
             ScreenSystem.AddScreen(new PlayScreen(2));
+            ScreenSystem.RemoveScreen(this);
         }
         void lavaLevel_Selected(object sender, EventArgs e)
         {
             ExitScreen();
             ScreenSystem.AddScreen(new PlayScreen(3));
+            ScreenSystem.RemoveScreen(this);
         }
         
         

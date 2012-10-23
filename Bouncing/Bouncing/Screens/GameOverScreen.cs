@@ -94,14 +94,16 @@ namespace Bouncing
         }
         void submenu_Selected(object sender, EventArgs e)
         {
-            Parent.ExitScreen();
+            ExitScreen();
+            ScreenSystem.RemoveScreen(this);
         }
 
         void MainMenuSelect(object sender, EventArgs e)
         {
             MenuCancel();
-            Parent.ExitScreen();
+            ExitScreen();
             ScreenSystem.AddScreen(new MainMenuScreen());
+            ScreenSystem.RemoveScreen(this);
         }
 
         void ResumeSelect(object sender, EventArgs e)
