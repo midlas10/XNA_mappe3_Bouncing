@@ -85,6 +85,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollisionSystem\CollisionDetectioncircleService.cs" />
     <Compile Include="CollisionSystem\CollisionDetectionService.cs" />
     <Compile Include="CollisionSystem\GameObjectCollidable.cs" />
     <Compile Include="CollisionSystem\IManageCollisionsService.cs" />

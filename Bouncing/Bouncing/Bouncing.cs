@@ -23,7 +23,7 @@ namespace Bouncing
         Color clearColor;
 
         private ObjectManager objectManager;
-        private CollisionDetectionService collisionDetectionService;
+        private IManageCollisionsService collisionDetectionService;
 
         public Bouncing()
         {
@@ -37,7 +37,7 @@ namespace Bouncing
             Components.Add(screenSystem);
 
             objectManager = new ObjectManager(this);
-            collisionDetectionService = new CollisionDetectionService(this);
+            collisionDetectionService = new CollisionDetectionCircleService(this);
 
             _input = new InputManager(this);
             
