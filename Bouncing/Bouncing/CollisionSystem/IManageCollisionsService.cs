@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace Bouncing
 {
@@ -19,5 +20,7 @@ namespace Bouncing
         void RegisterObject(GameObjectCollidable goc);
 
         void RemoveAllObjects();
+
+        void Update(GameTime gameTime);
     }
 }

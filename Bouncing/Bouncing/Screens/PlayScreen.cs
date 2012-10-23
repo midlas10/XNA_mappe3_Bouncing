@@ -34,26 +34,17 @@ namespace Bouncing
         Color clearColor;
 
         private ObjectManager objectManager;
-        private CollisionDetectionService collisionDetectionService;
+        private IManageCollisionsService collisionManager;
 
         private Player player;
         private Enemy enemy;
 
         public PlayScreen()
         {
-            objectManager = new ObjectManager(this);
-            collisionDetectionService = new CollisionDetectionService(this);
             clearColor = new Color(70, 132, 143);
+            objectManager = (ObjectManager) ScreenSystem.Game.Services.GetService(typeof (GameObject));
+            collisionManager = (IManageCollisionsService)ScreenSystem.Game.Services.GetService((typeof(IManageCollisionsService)));
 
-
-            //levelManager = new LevelManager();
-
-            _input = new InputManager(this);
-            Components.Add(_input);
-            Components.Add(objectManager);
-            Services.AddService(typeof(ObjectManager), objectManager);
-            Services.AddService(typeof(IManageCollisionsService), collisionDetectionService);
-            Services.AddService(typeof(IInputService), _input);
         }
 
         public override void Initialize()
@@ -75,39 +66,38 @@ namespace Bouncing
         public override void LoadContent()
         {
             spriteBatch = new SpriteBatch(graphics);
-            ContentManager content = 
             objectManager.SetSpritebatch(spriteBatch);
 
-            Background tempBack = new Background(content.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
+            Background tempBack = new Background(ScreenSystem.Game.Content.Load<Texture2D>(@"Maps/Level1/space"), spriteBatch);
 
 
-            player = new Player(this, spriteBatch,
-                new Vector2(graphics.PreferredBackBufferWidth / 2,
-                    graphics.PreferredBackBufferHeight / 2));
+            player = new Player(ScreenSystem.Game, spriteBatch,
+                new Vector2(300,
+                    300));
             player.LoadContent();
 
 
             objectManager.RegisterObject(player);
-            collisionDetectionService.RegisterObject(player);
+            collisionManager.RegisterObject(player);
 
 
             //Loading the Enemy Sprites
-            enemy = new Enemy(this, spriteBatch,
-                new Vector2(graphics.PreferredBackBufferWidth / 2,
-                    graphics.PreferredBackBufferHeight / 2));
+            enemy = new Enemy(ScreenSystem.Game, spriteBatch,
+                new Vector2(200,
+                    200));
             enemy.LoadContent();
 
 
             //Loading the Collectibles
-            Star test = new Star(this,
-                new Vector2(graphics.PreferredBackBufferWidth / 2,
-                    graphics.PreferredBackBufferHeight / 2), spriteBatch);
+            Star test = new Star(screenSystem.Game,
+                new Vector2(600,
+                    200), spriteBatch);
 
             //Object Manager
             objectManager.RegisterObject(test);
             objectManager.RegisterObject(enemy);
-            collisionDetectionService.RegisterObject(enemy);
-            collisionDetectionService.RegisterObject(test);
+            collisionManager.RegisterObject(enemy);
+            collisionManager.RegisterObject(test);
             base.LoadContent();
 
             ContentManager content = ScreenSystem.Content;
@@ -122,10 +112,7 @@ namespace Bouncing
         protected override void UpdateScreen(GameTime gameTime)
         {
             seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        }
-
-        protected override void Update(GameTime gameTime)
-        {
+        
 
             _input.Update(gameTime);
             //if (_input.IsKeyDown(Keys.Escape))
@@ -134,7 +121,7 @@ namespace Bouncing
             //AudioManager.singleton.Update();
 
 
-            collisionDetectionService.Update(gameTime);
+            collisionManager.Update(gameTime);
             objectManager.Update(gameTime);
 
 
@@ -150,10 +137,10 @@ namespace Bouncing
             }
         }
 
-        protected override void Draw(GameTime gameTime)
+        protected override void DrawScreen(GameTime gameTime)
         {
-            GraphicsDevice.Clear(clearColor);
-
+            ScreenSystem.Game.GraphicsDevice.Clear(clearColor);
+            objectManager.Draw(gameTime);
             base.Draw(gameTime);
         }
     }

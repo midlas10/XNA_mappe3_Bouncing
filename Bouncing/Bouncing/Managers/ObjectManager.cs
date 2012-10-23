@@ -26,17 +26,6 @@ namespace Bouncing
             objectsToRemove = new Queue<GameObject>();
         }
 
-        public ObjectManager Content
-        {
-            get { return Game.Content; }
-        }
-
-        public ObjectManager(PlayScreen playScreen)
-        {
-            // TODO: Complete member initialization
-            this.playScreen = playScreen;
-        }
-
         /// <summary>
         /// Allows the game component to update itself.
         /// </summary>

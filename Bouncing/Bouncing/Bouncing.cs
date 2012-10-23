@@ -18,6 +18,10 @@ namespace Bouncing
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         ScreenSystem screenSystem;
+        InputManager _input;
+
+        private ObjectManager objectManager;
+        private CollisionDetectionService collisionDetectionService;
 
         public Bouncing()
         {
@@ -28,6 +32,15 @@ namespace Bouncing
 
             screenSystem = new ScreenSystem(this);
             Components.Add(screenSystem);
+
+            objectManager = new ObjectManager(this);
+            collisionDetectionService = new CollisionDetectionService(this);
+
+            _input = new InputManager(this);
+            
+            Services.AddService(typeof(ObjectManager), objectManager);
+            Services.AddService(typeof(IManageCollisionsService), collisionDetectionService);
+            Services.AddService(typeof(IInputService), _input);
         }
 
         protected override void Initialize()
