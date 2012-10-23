@@ -7,7 +7,7 @@ namespace Bouncing
 {
     public class Player : GameObjectCollidable
     {
-        protected float movementPerSecond = (float)120;
+        protected float movementPerSecond = (float)500;
         protected SpriteBatch spriteBatch;
         protected Game game;
 
@@ -54,6 +54,7 @@ namespace Bouncing
             currentFrame.X = 1;
             currentFrame.Y = 1;
 
+            #region Player Input
             if ((_input.IsKeyDown(Keys.D) || _input.IsKeyDown(Keys.Right)) && (_input.IsKeyDown(Keys.W) || _input.IsKeyDown(Keys.Up)))
             {
                 if (game.Window.ClientBounds.Width >= position.X + collisionBox.Width)
@@ -145,6 +146,8 @@ namespace Bouncing
                 currentFrame.X = 2;
                 currentFrame.Y = 1;
             }
+            #endregion
+
 
             collisionBox = new Rectangle((int)position.X, (int)position.Y, 100, 100);
 

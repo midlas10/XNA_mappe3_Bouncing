@@ -1,9 +1,10 @@
 Content\SpriteFont1.xnb
 Content\Fonts\MenuFont.xnb
-Content\Fonts\GameFont.xnb
 Content\Maps\Level1\space.xnb
 Content\Maps\Level2\underwaterlvl.xnb
 Content\Images\Player\blob.xnb
 Content\Images\Enemies\vortex.xnb
 Content\Collectibles\Level1\star.xnb
+Content\Fonts\GameFont.xnb
 Content\Images\intro.xnb
+Content\Images\menu.xnb

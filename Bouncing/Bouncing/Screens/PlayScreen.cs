@@ -141,7 +141,7 @@ namespace Bouncing
             
             objectManager.Draw(gameTime);
 
-            base.Draw(gameTime);
+            //base.Draw(gameTime);
         }
     }
 }

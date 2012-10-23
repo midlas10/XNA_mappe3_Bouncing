@@ -13,6 +13,7 @@ namespace Bouncing
     public class MainMenuScreen : MenuScreen
     {
         string prevEntry, nextEntry, selectedEntry, cancelMenu;
+
         public override string PreviousEntryActionName
         {
             get { return prevEntry; }
@@ -34,6 +35,9 @@ namespace Bouncing
         }
 
         MainMenuEntry play, levelSelect, submenu, intro, quit;
+
+        SpriteBatch spriteBatch;
+        Texture2D background;
 
         public MainMenuScreen()
         {
@@ -95,10 +99,13 @@ namespace Bouncing
         {
             ContentManager content = ScreenSystem.Content;
             SpriteFont = content.Load<SpriteFont>(@"Fonts/MenuFont");
+            background = content.Load<Texture2D>(@"Images/menu");
+
+            //Vector2 test = new Vector2(100, 200);
 
             play.SetPosition(new Vector2(100, 200), true);
-            levelSelect.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), levelSelect, true);
-            submenu.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), play, true);
+            levelSelect.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), play, true);
+            submenu.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), levelSelect, true);
             intro.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), submenu, true);
             quit.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), intro, true);
         }
@@ -152,6 +159,13 @@ namespace Bouncing
         void MainMenuRemoving(object sender, EventArgs e)
         {
             MenuEntries.Clear();
+        }
+
+        protected override void DrawScreen(GameTime gameTime)
+        {
+            //spriteBatch.Draw(background, Vector2.Zero, Color.White);
+            
+            base.DrawScreen(gameTime);
         }
     }
 }

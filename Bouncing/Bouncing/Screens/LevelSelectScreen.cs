@@ -65,7 +65,7 @@ namespace Bouncing
 
             //Initialize the entry and add it to the list.
 
-            lavaLevel = new MainMenuEntry(this, "Laval world");
+            lavaLevel = new MainMenuEntry(this, "Lava world");
             back = new MainMenuEntry(this, "Back");
 
             MenuEntries.Add(back);
@@ -84,9 +84,12 @@ namespace Bouncing
                 push = ((MenuScreen)Parent).MenuEntries[0].Position +
                     ((MenuScreen)Parent).SpriteFont.MeasureString(((MenuScreen)Parent).MenuEntries[0].EntryTitle);
 
-            lavaLevel.SetPosition(new Vector2(100 + push.X, 200), true);
+            
             back.SetPosition(new Vector2(100 + push.X, 200), true);
+            lavaLevel.SetRelativePosition(new Vector2(0, SpriteFont.LineSpacing + 5), back, true);
             back.Selected += new EventHandler(back_Selected);
+
+            lavaLevel.Selected += new EventHandler(lavaLevel_Selected);
 
             //The title of the menu entry that activated this menu
             //Will be dynamic in build 0.9x           
@@ -98,5 +101,12 @@ namespace Bouncing
         {
             MenuCancel();
         }
+
+        void lavaLevel_Selected(object sender, EventArgs e)
+        {
+            ExitScreen();
+            ScreenSystem.AddScreen(new PlayScreen(1));
+        }
+
     }
 }
