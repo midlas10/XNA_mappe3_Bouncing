@@ -20,11 +20,14 @@ namespace Bouncing
         ScreenSystem screenSystem;
         InputManager _input;
 
+        Color clearColor;
+
         private ObjectManager objectManager;
         private CollisionDetectionService collisionDetectionService;
 
         public Bouncing()
         {
+            clearColor = new Color(22,22,22);
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
@@ -51,7 +54,8 @@ namespace Bouncing
             Settings.MusicVolume = 1.0f;
 
             // TODO: Add your initialization logic here
-            screenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
+            //screenSystem.AddScreen(new IntroScreen(Color.Black, 0.5f));
+            screenSystem.AddScreen(new MainMenuScreen());
             base.Initialize();
         }
 
@@ -74,7 +78,7 @@ namespace Bouncing
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(clearColor);
 
 
             base.Draw(gameTime);

@@ -31,7 +31,6 @@ namespace Bouncing
         SpriteBatch spriteBatch;
         InputManager _input;
         ScreenSystem screenSystem;
-        Color clearColor;
 
         private ObjectManager objectManager;
         private IManageCollisionsService collisionManager;
@@ -41,7 +40,7 @@ namespace Bouncing
 
         public PlayScreen()
         {
-            clearColor = new Color(70, 132, 143);
+            
             objectManager = (ObjectManager) ScreenSystem.Game.Services.GetService(typeof (GameObject));
             collisionManager = (IManageCollisionsService)ScreenSystem.Game.Services.GetService((typeof(IManageCollisionsService)));
 
@@ -139,7 +138,6 @@ namespace Bouncing
 
         protected override void DrawScreen(GameTime gameTime)
         {
-            ScreenSystem.Game.GraphicsDevice.Clear(clearColor);
             objectManager.Draw(gameTime);
             base.Draw(gameTime);
         }

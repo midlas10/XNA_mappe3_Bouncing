@@ -53,9 +53,9 @@ namespace Bouncing
             TransitionOffTime = TimeSpan.FromSeconds(0.5);
 
             //Customize the text colors.
-            Selected = Color.Yellow;
-            Highlighted = Color.Green;
-            Normal = Color.White;
+            Selected = Color.Purple;
+            Highlighted = Color.Purple;
+            Normal = Color.Gray;
         }
 
         public override void Initialize()
